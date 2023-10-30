@@ -1,0 +1,22 @@
+- hosts: all
+  become_user: root
+
+  tasks:
+    - name: Install i3 window manager
+      become: true
+      apt:
+        pkg:
+           - i3-wm
+           - i3blocks
+           - i3lock
+           - rofi
+        state: latest
+        update_cache: true
+    
+    - name: Download i3 config
+      git:
+        repo: https://github.com/mikalai-dev/i3_config.git
+        dest: ~/.config/i3
+        clone: yes
+        update: yes
+    

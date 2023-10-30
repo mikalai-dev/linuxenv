@@ -1,0 +1,34 @@
+- hosts: all
+  become_user: root
+  tasks:
+    - name: Download telegram messenger
+      get_url:
+           url: https://telegram.org/dl/desktop/linux
+           dest: /tmp/telegram.tar.gz
+      register: download_arch
+
+    - name: Extract archive
+      become: true
+      unarchive:
+           src: /tmp/telegram.tar.gz
+           dest: /opt/telegram
+      when: download_arch.changed
+
+    - name: Link the binary to /usr/bin
+      become: true
+      file:
+            src: /opt/telegram/Telegram
+            dest: /usr/bin/telegram
+            state: link
+
+    - name: Change mode to executable
+      become: true
+      file:
+            path: /usr/bin/telegram
+            mode: 'u+x'
+
+    - name: Cleanup
+      file:
+            state: absent
+            path: /tmp/telegram.tar.gz
+      
