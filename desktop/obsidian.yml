@@ -1,0 +1,31 @@
+- hosts: localhost
+  become_user: root
+  tasks:
+    - name: Get the latest release information from GitHub
+      uri:
+        url: https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest
+        return_content: yes
+      register: github_release
+
+    - name: Find the .deb package URL in the release assets
+      set_fact:
+        deb_package_url: "{{ item.browser_download_url }}"
+      loop: "{{ github_release.json.assets }}"
+      when: item.name | regex_search('.*\\.deb$')
+
+    - name: Download the latest obsidian .deb package
+      get_url:
+        url: "{{ deb_package_url }}"
+        dest: /tmp/obsidian.deb
+      delegate_to: localhost
+      when: deb_package_url is defined
+
+    - name: Install the downloaded package
+      apt:
+        deb: /tmp/obsidian.deb
+      become: yes
+
+    - name: Cleanup
+      file:
+           state: absent
+           path: /tmp/obsidian.deb
