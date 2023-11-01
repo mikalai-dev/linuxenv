@@ -1,0 +1,11 @@
+- hosts: localhost
+  become_user: root
+  tasks:
+    - name: Install KeepassXC
+      become: true
+      apt:
+        pkg:
+            - keepassxc
+        state: latest
+        udpate_cache: true
+ 
