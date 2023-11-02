@@ -1,0 +1,14 @@
+- hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Install 
+      apt:
+        pkg:
+            - mc
+            - htop
+            - neomutt
+            - zsh
+            - cryptsetup
+      state: latest
+      update_cache: true
