@@ -1,0 +1,34 @@
+- hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Add the deadsnakes PPA for updated Python versions
+      apt_repository:
+        repo: ppa:deadsnakes/ppa
+        state: present
+      tags:
+        - ppa
+
+    - name: Install Python 3.11
+      apt:
+        name: python3.11
+        state: latest
+      tags:
+        - python
+
+    - name: Install pip for Python 3.11
+      apt:
+        name: python3.11-pip
+        state: latest
+      tags:
+        - pip
+
+    - name: Upgrade pip for Python 3.11
+      command: python3.11 -m pip install --upgrade pip
+      tags:
+        - upgrade-pip
+
+    - name: Install python-lsp-server[all] for PLS support in Emacs
+      command: python3.11 -m pip install python-lsp-server[all]
+      tags:
+        - python-lsp-server
