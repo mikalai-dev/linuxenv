@@ -1,0 +1,14 @@
+- hosts: localhost
+  tasks:
+    - name: Install alacritty
+      become: true
+      apt:
+        pkg:
+          - alacritty
+        state: latest
+        update_cache: true
+    
+    - name: Copy alacritty config
+      copy:
+        src: ../configs/alacritty.yml
+        dest ~/.config
