@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+    - name: Install thunderbird
+      become: true
+      apt:
+        pkg:
+           - thunderbird
+        state: latest
+        update_cache: true
+      

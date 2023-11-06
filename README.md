@@ -22,7 +22,8 @@ git clone https://github.com/mikalai-dev/linuxenv.git && ./run.sh
 - Telegram
 - Golang 1.21.3
 - Python 3.11
-- Qemu 
+- Qemu
+- Thunderbird
 
 
 
