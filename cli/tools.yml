@@ -1,8 +1,7 @@
 - hosts: localhost
-  become: yes
-
   tasks:
-    - name: Install 
+    - name: Install
+      become: true
       apt:
         pkg:
             - mc
