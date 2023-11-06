@@ -1,0 +1,17 @@
+- hosts: localhost
+  tasks:
+    - name: Install libvirt
+    become: true
+    apt:
+      pkg:
+         - libvirtd
+         - qemu-kvm
+         - virt-manager
+         - qemu-img
+         - qemu-utils
+      state: latest
+      update_cache: true
+    
+    - name: Start libvirt
+      service: libvirtd
+      status: started
