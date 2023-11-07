@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+    - name: Install viking
+      become: true
+      apt:
+        pkg:
+          - viking
+        state: latest
+        update_cache: true
+    
