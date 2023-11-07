@@ -24,6 +24,6 @@ git clone https://github.com/mikalai-dev/linuxenv.git && ./run.sh
 - Python 3.11
 - Qemu
 - Thunderbird
-
+- Torbrowser
 
 

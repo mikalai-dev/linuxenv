@@ -6,6 +6,8 @@ create_env:
     ansible-playbook desktop/obsidian.yml -i local -vv -e curdir=$(CURDIR)
     ansible-playbook desktop/keepassxc.yml -i local -vv -e curdir=$(CURDIR)
     ansible-playbook desktop/alacritty.yml -i local -vv -e curdir=$(CURDIR)
+	ansible-playbook desktop/thunderbird.yml -i local -vv -e curdir=$(CURDIR)
+    ansible-playbook desktop/torbrowser.yml -i local -vv -e curdir=$(CURDIR)
     ansible-playbook dev/python.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook dev/golang.yml -i local -vv -e curdir=$(CURDIR)
     ansible-playbook cli/tools.yml -i local -vv -e curdir=$(CURDIR)
