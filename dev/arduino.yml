@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+    - name: Install Arduino IDE
+      become: true
+      apt:
+        pkg:
+          - arduino
+          - arduino-core
+        state: latest
+        update_cache: true
+ 
