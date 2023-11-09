@@ -7,8 +7,13 @@
           - alacritty
         state: latest
         update_cache: true
+
+    - name: Clone a repo with color themes
+      git:
+           repo: https://github.com/mikalai-dev/alacritty-theme.git
+           dest: ~/.config/alacritty/themes
     
     - name: Copy alacritty config
       copy:
         src: ../configs/alacritty.yml
-        dest ~/.config
+        dest ~/.config/alacritty/
