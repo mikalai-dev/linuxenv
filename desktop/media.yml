@@ -16,4 +16,12 @@
           - vlc
         state: latest
         update_cache: true
+
+    - name: Install Calibre
+      become: true
+      apt:
+        pkg:
+          - calibre
+        state: latest
+        update_cache: true
     
