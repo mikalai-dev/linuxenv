@@ -1,0 +1,45 @@
+- hosts: localhost
+  become_user: root
+  tasks:
+    - name: Ensure required packages are installed
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - curl
+
+    - name: Fetch latest nightly release version
+      uri:
+        url: https://api.github.com/repos/darktable-org/darktable/releases/tags/nightly
+        return_content: yes
+      register: nightly_release
+
+    - name: Get download URL for Nightly AppImage release
+      set_fact:
+         download_url: "{{ nightly_release.json.assets | selectattr('name', 'match', '^Darktable.*AppImage$') | map(attribute='browser_download_url') | first }}"
+
+    - name: Print download URL
+      debug:
+          var: download_url
+
+    - name: Create destination directory /opt/darktable
+      become: yes
+      file:
+         path: "/opt/darktable"
+         state: directory
+    
+    - name: Download Nightly Darktable AppImage
+      become: yes
+      get_url:
+        url: "{{ download_url }}"
+        dest: "/opt/darktable/darktable.AppImage"
+        mode: 0755
+      register: download_appimage
+
+    - name: Create a symlink to /usr/bin
+      become: yes
+      file:
+        src: "/opt/darktable/darktable.AppImage"
+        dest: "/usr/bin/darktable"
+        state: link
+      when: download_appimage.changed

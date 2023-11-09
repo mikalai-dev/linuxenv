@@ -1,0 +1,9 @@
+- hosts: localhost
+  tasks:
+    - name: Install GIMP
+      become: true
+      apt:
+        pkg:
+            - gimp
+      state: latest
+      update_cache: true
