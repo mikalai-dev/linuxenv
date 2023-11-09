@@ -8,6 +8,8 @@ git clone https://github.com/mikalai-dev/linuxenv.git && ./run.sh
 
 ### List of software to install
 - Brave Browser
+- Vivaldi Browser
+- Torbrowser
 - Mc
 - Htop
 - Neomutt
@@ -24,6 +26,5 @@ git clone https://github.com/mikalai-dev/linuxenv.git && ./run.sh
 - Python 3.11
 - Qemu
 - Thunderbird
-- Torbrowser
 
 

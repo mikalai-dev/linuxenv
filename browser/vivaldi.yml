@@ -1,0 +1,36 @@
+- hosts: all
+  tasks:
+    - name: Add vivaldi repository key
+      become: true
+      apt_key:
+         url: https://repo.vivaldi.com/stable/linux_signing_key.pub
+      when:
+         - ansible_distribution in ["Debian", "Ubuntu"]
+
+
+    - name: Check if repository exists
+      stat:
+          path: /etc/apt/sources.list.d/vivaldi.list
+      register:
+          vivaldi_repo
+
+    - name: Add repository
+      become: true
+      apt_repository:
+          repo: "deb https://repo.vivaldi.com/stable/deb/ stable main"
+          state: present
+          filename: vivaldi
+      when:
+        - ansible_distribution in ["Debian", "Ubuntu"]
+        - vivaldi_repo.stat.exists == False
+
+    - name: Install package
+      apt:
+        name: vivaldi-stable
+        state: latest
+      when:
+        - ansible_distribution in ["Debian", "Ubuntu"]
+
+
+
+    
