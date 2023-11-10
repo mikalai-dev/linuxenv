@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+    - name: Install syncthing
+      become: true
+      apt:
+        pkg:
+          - cups
+        state: latest
+        update_cache: true
+      
