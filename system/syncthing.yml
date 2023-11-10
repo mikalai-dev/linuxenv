@@ -1,0 +1,18 @@
+- hosts: localhost
+  tasks:
+    - name: Install syncthing
+      become: true
+      apt:
+        pkg:
+          - syncthing
+        state: latest
+        update_cache: true
+
+    - name: Get current username
+      set_fact:
+          current_user: "{{ ansible_env.USER }}"
+    
+    - name: Enable syncthing autostart on login
+      become: true
+      command: "systemctl --user enable syncthing@{{ current_user }}.service"
+      

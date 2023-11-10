@@ -16,5 +16,7 @@ create_env:
 	ansible-playbook cli/tools.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook graphics/gimp.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook graphics/darktable.yml -i local -vv -e curdir=$(CURDIR)
+	ansible-playbook system/syncthing.yml -i local -vv -e curdir=$(CURDIR)
+
 
 
