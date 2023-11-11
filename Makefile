@@ -10,6 +10,7 @@ create_env:
 	ansible-playbook desktop/thunderbird.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook desktop/torbrowser.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook desktop/signal.yml -i local -vv -e curdir=$(CURDIR)
+	ansible-playbook desktop/briar.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook desktop/gis.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook dev/python.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook dev/golang.yml -i local -vv -e curdir=$(CURDIR)
