@@ -1,0 +1,18 @@
+- hosts: all
+  tasks:
+    - name: signal-desktop - add apt key
+      apt_key:
+        url: https://updates.signal.org/desktop/apt/keys.asc
+        state: present
+
+    - name: signal-desktop - add apt repo
+      become: true
+      apt_repository:
+        repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+        state: present
+
+    - name: signal-desktop - install
+      become: true
+      apt:
+        name: signal-desktop
+        update_cache: true
