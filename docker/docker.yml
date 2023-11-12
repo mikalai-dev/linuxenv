@@ -1,5 +1,5 @@
 - hosts: all
-  var:
+  vars:
     docker_compose_version: "2.23.0"
 
   become_user: root
