@@ -26,5 +26,14 @@ git clone https://github.com/mikalai-dev/linuxenv.git && ./run.sh
 - Python 3.11
 - Qemu
 - Thunderbird
+- Docker
+- Arduino IDE
+- Signal Messenger
+- Briar Messenger
+- Syncthing
+- CUPS server
+- GIMP
+- Darktable
+- Viking
 
 
