@@ -14,9 +14,5 @@
         update_cache: true
     
     - name: Download i3 config
-      git:
-        repo: https://github.com/mikalai-dev/i3_config.git
-        dest: ~/.config/i3
-        clone: yes
-        update: yes
+      command: git clone 'https://github.com/mikalai-dev/i3_config.git' ~/.config/i3
     
