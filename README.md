@@ -2,7 +2,7 @@
 
 ### Run
 ```
-git clone https://github.com/mikalai-dev/linuxenv.git && ./run.sh
+git clone https://github.com/mikalai-dev/linuxenv.git && cd linux env && ./run.sh
 ```
 
 
@@ -27,6 +27,7 @@ git clone https://github.com/mikalai-dev/linuxenv.git && ./run.sh
 - Qemu
 - Thunderbird
 - Docker
+- Docker-compose
 - Arduino IDE
 - Signal Messenger
 - Briar Messenger
