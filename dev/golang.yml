@@ -28,6 +28,9 @@
         - "export PATH=$PATH:/usr/local/go/bin"
         - "export GOPATH=$HOME/go"
 
+    - name: Install go-pls server
+      command: go install golang.org/x/tools/gopls@latest
+
     - name: Cleanup the downloaded archive
       become: true
       command: rm /tmp/go.tar.gz
