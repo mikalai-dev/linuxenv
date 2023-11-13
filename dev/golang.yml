@@ -12,11 +12,12 @@
       changed_when: download_result.changed
 
     - name: Extract Go archive
+      become: true
+      become_user: root
       ansible.builtin.unarchive:
         src: "/tmp/go.tar.gz"
-        dest: "/tmp/local"
+        dest: "/usr/local"
         remote_src: yes
-      when: download_result.changed
 
     - name: Add Go Environment variables to shell profile
       lineinfile:
@@ -27,6 +28,7 @@
         - "export PATH=$PATH:/usr/local/go/bin"
         - "export GOPATH=$HOME/go"
 
-    - name: Ensure Go is in the PATH immediately
-      command: "source {{ ansible_env.HOME }}/.zshrc"
-      when: download_result.changed
+    - name: Cleanup the downloaded archive
+      become: true
+      command: rm /tmp/go.tar.gz
+      
