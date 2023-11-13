@@ -1,13 +1,5 @@
 - hosts: localhost
   tasks:
-    - name: Add the deadsnakes PPA for updated Python versions
-      become: true
-      apt_repository:
-        repo: ppa:deadsnakes/ppa
-        state: present
-      tags:
-        - ppa
-
     - name: Install Python 3.11
       become: true
       apt:
