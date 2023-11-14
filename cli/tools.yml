@@ -11,3 +11,8 @@
            - cryptsetup
         state: latest
         update_cache: true
+
+    - name: Copy zshrc config
+      copy:
+        src: ./config/.zshrc
+        dest: ~/
