@@ -1,6 +1,6 @@
 - hosts: localhost
   vars:
-    go_version: "1.21.3"
+    go_version: "1.21.4"
     sys_architecture: "amd64"
   tasks:
     - name: Download Go binary
@@ -8,8 +8,6 @@
       get_url:
         url: "https://golang.org/dl/go{{ go_version }}.linux-{{ sys_architecture }}.tar.gz"
         dest: "/tmp/go.tar.gz"
-      register: download_result
-      changed_when: download_result.changed
 
     - name: Extract Go archive
       become: true
@@ -33,5 +31,4 @@
 
     - name: Cleanup the downloaded archive
       become: true
-      command: rm /tmp/go.tar.gz
-      
+      command: rm /tmp/go.tar.gz 
