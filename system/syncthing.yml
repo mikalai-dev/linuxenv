@@ -14,5 +14,8 @@
     
     - name: Enable syncthing autostart on login
       become: true
-      command: "systemctl --user enable syncthing@{{ current_user }}.service"
+      systemd:
+        name: syncthing@{{ current_user }}
+        state: started
+        enabled: true
       
