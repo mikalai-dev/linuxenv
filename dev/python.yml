@@ -1,29 +1,28 @@
 - hosts: localhost
+  become_user: root
   tasks:
     - name: Install Python 3.11
-      become: true
+      become: yes
+      become_user: root
       apt:
-        name: python3.11
+        pkg: 
+          - python3.11
+          - python3-pip
         state: latest
+        update_cache: true
       tags:
         - python
-
-    - name: Install pip for Python 3.11
-      become: true
-      apt:
-        name: python3.11-pip
-        state: latest
-      tags:
         - pip
 
     - name: Upgrade pip for Python 3.11
       become: true
+      become_user: root
       command: python3.11 -m pip install --upgrade pip
       tags:
         - upgrade-pip
 
     - name: Install python-lsp-server[all] for PLS support in Emacs
       become: true
-      command: python3.11 -m pip install python-lsp-server[all]
+      command: python3 -m pip install python-lsp-server[all]
       tags:
         - python-lsp-server
