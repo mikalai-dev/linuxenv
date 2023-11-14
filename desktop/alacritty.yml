@@ -1,12 +1,28 @@
 - hosts: localhost
   tasks:
-    - name: Install alacritty
-      become: true
-      apt:
-        pkg:
-          - alacritty
-        state: latest
-        update_cache: true
+    - name: Check if cargo installed
+      shell: command -v cargo
+      register: cargo_exists
+      ignore_errors: yes
+    
+    - name: Download installer
+      when: cargo_exists is failed
+      get_url:
+          url: https://sh.rustup.rs
+          dest: /tmp/sh.rustup.rs
+          mode: '0755'
+          force: 'yes'
+      tags:
+        - rust
+
+    - name: install rust/cargo
+      when: cargo_exists is failed
+      shell: /tmp/sh.rustup.rs -y
+      tags:
+        - rust
+
+    - name: install alacritty
+      command: 'cargo install alacritty'
 
     - name: Clone a repo with color themes
       git:
