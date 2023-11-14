@@ -5,5 +5,5 @@
       apt:
         pkg:
             - gimp
-      state: latest
-      update_cache: true
+        state: latest
+        update_cache: true
