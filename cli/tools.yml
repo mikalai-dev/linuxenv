@@ -4,10 +4,10 @@
       become: true
       apt:
         pkg:
-            - mc
-            - htop
-            - neomutt
-            - zsh
-            - cryptsetup
-      state: latest
-      update_cache: true
+           - mc
+           - htop
+           - neomutt
+           - zsh
+           - cryptsetup
+        state: latest
+        update_cache: true
