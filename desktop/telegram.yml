@@ -7,6 +7,11 @@
            dest: /tmp/telegram.tar.gz
       register: download_arch
 
+    - name: Create destination directory
+      become: true
+      file:
+           path: /opt/telegram
+           state: directory
     - name: Extract archive
       become: true
       unarchive:
@@ -20,6 +25,7 @@
             src: /opt/telegram/Telegram
             dest: /usr/bin/telegram
             state: link
+            force: yes
 
     - name: Change mode to executable
       become: true
