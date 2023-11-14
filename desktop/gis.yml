@@ -5,6 +5,7 @@
       apt:
         pkg:
           - viking
+          - josm
         state: latest
         update_cache: true
     
