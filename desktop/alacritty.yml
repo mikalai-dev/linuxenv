@@ -16,4 +16,4 @@
     - name: Copy alacritty config
       copy:
         src: ../configs/alacritty.yml
-        dest ~/.config/alacritty/
+        dest: ~/.config/alacritty/
