@@ -1,4 +1,5 @@
 - hosts: all
+  become_user: root
   tasks:
     - name: signal-desktop - add apt key
       apt_key:
@@ -7,6 +8,7 @@
 
     - name: signal-desktop - add apt repo
       become: true
+      become_user: root
       apt_repository:
         repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
         state: present
