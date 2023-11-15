@@ -24,4 +24,9 @@
           - calibre
         state: latest
         update_cache: true
-    
+
+    - name: Install documents viewer
+      become: true
+      apt:
+        pkg:
+          - evince    
