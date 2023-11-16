@@ -1,0 +1,75 @@
+- hosts: localhost
+  become_user: root
+    tasks:
+      - name: Install dependencies
+        become: true
+        apt:
+          pkg:
+             - autoconf
+             - build-essential
+             - libgtk-3-dev
+             - libgnutls28-dev
+             - libtiff5-dev
+             - libgif-dev
+             - libjpeg-dev
+             - libpng-dev
+             - libxpm-dev
+             - libncurses-dev
+             - texinfo
+             - libjansson4
+             - libjansson-dev
+             - libgccjit0
+             - libgccjit-10-dev
+             - gcc-12
+             - libmagickcore-dev
+             - libmagick++-dev
+             - libtree-sitter-dev    
+          state: latest
+          update_cache: true
+    
+      - name: Create directory for sources
+        file:
+           path: "{{ ansible_env.HOME }}/repo"
+           state: directory
+
+      - name: Clone emacs repo
+        git:
+          repo: 'git://git.sv.gnu.org/emacs.git'
+          dest: "{{ ansible_env.HOME }}/repo/emacs"
+          version: master
+
+      - name: Create ./configure file
+        shell:
+            cmd: sh autogen.sh
+            chdir: "{{ ansible_env.HOME }}/repo/emacs"
+
+      - name: Configure emacs
+        shell:
+            cmd: sh configure --with-cairo --with-xwidgets --with-x-toolkit=gtk3
+            chdir: "{{ ansible_env.HOME }}/repo/emacs"
+
+      - name: Get the number of cores
+        command: nproc --all
+        register: nproc
+
+      - name: Build emacs
+        shell:
+          cmd: make -j{{ nproc.stdout }}
+          chdir: "{{ ansible_env.HOME }}/repo/emacs"
+
+      - name: Install
+        shell:
+          cmd: make install
+          chdir: "{{ ansible_env.HOME }}/repo/emacs"
+        become: true
+        become_method: sudo
+
+      - name: Cloning the configuration
+        command: git clone 'https://github.com/mikalai-dev/emacs_config.git' ~/.emacs.d
+       
+      - name: Cleanup
+        file:
+          state: absent
+          path: "{{ ansible_env.HOME }}/repo/emacs"
+
+    

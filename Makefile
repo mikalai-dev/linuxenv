@@ -16,6 +16,7 @@ create_env:
 	ansible-playbook dev/python.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook dev/golang.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook dev/arduino.yml -i local -vv -e curdir=$(CURDIR)
+	ansible-playbook dev/emacs.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook cli/tools.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook graphics/gimp.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook graphics/darktable.yml -i local -vv -e curdir=$(CURDIR)
