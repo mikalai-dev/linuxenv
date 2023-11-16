@@ -45,7 +45,7 @@
 
       - name: Configure emacs
         shell:
-            cmd: sh configure --with-cairo --with-xwidgets --with-x-toolkit=gtk3
+            cmd: sh configure --with-cairo --with-xwidgets
             chdir: "{{ ansible_env.HOME }}/repo/emacs"
 
       - name: Get the number of cores
@@ -62,7 +62,6 @@
           cmd: make install
           chdir: "{{ ansible_env.HOME }}/repo/emacs"
         become: true
-        become_method: sudo
 
       - name: Cloning the configuration
         command: git clone 'https://github.com/mikalai-dev/emacs_config.git' ~/.emacs.d
