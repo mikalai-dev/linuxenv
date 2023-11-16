@@ -1,35 +1,24 @@
 - hosts: localhost
   tasks:
-    - name: Check if cargo installed
-      shell: command -v cargo
-      register: cargo_exists
-      ignore_errors: yes
-    
-    - name: Download installer
-      when: cargo_exists is failed
-      get_url:
-          url: https://sh.rustup.rs
-          dest: /tmp/sh.rustup.rs
-          mode: '0755'
-          force: 'yes'
-      tags:
-        - rust
+    - name: Install dependencies
+      become: true
+      apt:
+        name:
+          - cmake
+          - pkg-config
+          - libfreetype6-dev
+          - libfontconfig1-dev
+          - libxcb-xfixes0-dev
+          - python3
+          - libxcb-shape0-dev
+          - libxcb-xkb-dev
+          - libxkbcommon-x11-dev
+          - libxcb1-dev
+          - libxcb-keysyms1-dev
+          - libxrandr-dev
+          - libxi-dev
+          - cargo
 
-    - name: install rust/cargo
-      when: cargo_exists is failed
-      shell: /tmp/sh.rustup.rs -y
-      tags:
-        - rust
 
-    - name: install alacritty
-      command: 'cargo install alacritty'
-
-    - name: Clone a repo with color themes
-      git:
-           repo: https://github.com/mikalai-dev/alacritty-theme.git
-           dest: ~/.config/alacritty/themes
-    
-    - name: Copy alacritty config
-      copy:
-        src: ../configs/alacritty.yml
-        dest: ~/.config/alacritty/
+    - name: Build and install Alacritty
+      command: cargo install alacritty
