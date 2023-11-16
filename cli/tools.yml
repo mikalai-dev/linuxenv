@@ -16,5 +16,5 @@
 
     - name: Copy zshrc config
       copy:
-        src: ./config/.zshrc
+        src: ../configs/.zshrc
         dest: ~/
