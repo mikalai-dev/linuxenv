@@ -45,7 +45,7 @@
 
       - name: Configure emacs
         shell:
-            cmd: sh configure --with-cairo --with-xwidgets
+            cmd: sh configure
             chdir: "{{ ansible_env.HOME }}/repo/emacs"
 
       - name: Get the number of cores
