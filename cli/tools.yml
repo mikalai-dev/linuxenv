@@ -9,6 +9,8 @@
            - neomutt
            - zsh
            - cryptsetup
+           - openssh-client
+           - openssh-server
         state: latest
         update_cache: true
 
