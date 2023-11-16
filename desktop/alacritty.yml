@@ -22,3 +22,8 @@
 
     - name: Build and install Alacritty
       command: cargo install alacritty
+
+    - name: Copy alacritty config
+      copy:
+         src: ../configs/alacritty.yml
+         dest: ~/.config
