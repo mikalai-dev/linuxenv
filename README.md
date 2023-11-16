@@ -2,7 +2,7 @@
 
 ### Run
 ```
-git clone https://github.com/mikalai-dev/linuxenv.git && cd linux env && ./run.sh
+git clone https://github.com/mikalai-dev/linuxenv.git && cd linuxenv && ./run.sh
 ```
 
 
@@ -15,6 +15,7 @@ git clone https://github.com/mikalai-dev/linuxenv.git && cd linux env && ./run.s
 - Neomutt
 - Zsh
 - Cryptsetup
+- Openssh
 - Alacritty
 - I3 wm
 - Keepassxc
@@ -36,5 +37,5 @@ git clone https://github.com/mikalai-dev/linuxenv.git && cd linux env && ./run.s
 - GIMP
 - Darktable
 - Viking
-
+- Emacs
 
