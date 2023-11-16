@@ -1,20 +1,22 @@
-- hosts: all
-  become_user: root
+- hosts: localhost
+  become: true
   tasks:
-    - name: signal-desktop - add apt key
+    - name: Add Signal APT repository key
       apt_key:
         url: https://updates.signal.org/desktop/apt/keys.asc
-        state: present
+      register: key_result
 
-    - name: signal-desktop - add apt repo
-      become: true
-      become_user: root
+    - name: Add Signal APT repository
       apt_repository:
         repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
         state: present
+      when: key_result.changed
 
-    - name: signal-desktop - install
-      become: true
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Signal Messenger
       apt:
         name: signal-desktop
-        update_cache: true
+        state: present
