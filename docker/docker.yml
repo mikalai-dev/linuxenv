@@ -56,3 +56,9 @@
       file:
         path: /usr/local/bin/docker-compose
         mode: +x
+
+    - name: Add current user to the docker group
+      become: true
+      user:
+           name: "{{ ansible_user }}"
+           groups: docker

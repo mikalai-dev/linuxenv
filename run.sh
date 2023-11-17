@@ -11,8 +11,6 @@ sudo chown -R $USER ~/.ansible
 echo "Installing the environment"
 make create_env
 
-echo "Add current user to the docker group"
-sudo usermod -a -G docker $USER
 
 
 
