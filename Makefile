@@ -22,5 +22,6 @@ create_env:
 	ansible-playbook graphics/darktable.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook system/syncthing.yml -i local -vv -e curdir=$(CURDIR)
 	ansible-playbook system/cups.yml -i local -vv -e curdir=$(CURDIR)
+	ansible-playbook system/veracrypt.yml -i local -vv -e curdir=$(CURDIR)
 
 

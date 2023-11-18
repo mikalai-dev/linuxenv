@@ -38,4 +38,5 @@ git clone https://github.com/mikalai-dev/linuxenv.git && cd linuxenv && ./run.sh
 - Darktable
 - Viking
 - Emacs
+- Veracrypt 1.26.7
 
