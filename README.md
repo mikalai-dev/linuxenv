@@ -7,36 +7,37 @@ git clone https://github.com/mikalai-dev/linuxenv.git && cd linuxenv && ./run.sh
 
 
 ### List of software to install
-- Brave Browser
-- Vivaldi Browser
-- Torbrowser
-- Mc
-- Htop
-- Neomutt
-- Zsh
-- Cryptsetup
-- Openssh
+
 - Alacritty
-- I3 wm
-- Keepassxc
-- Spotify client
-- VLC
-- Obsidian
-- Telegram
-- Golang 1.21.3
-- Python 3.11
-- Qemu
-- Thunderbird
+- Arduino IDE
+- Brave Browser
+- Briar Messenger
+- Cryptsetup
+- CUPS server
+- Darktable
 - Docker
 - Docker-compose
-- Arduino IDE
-- Signal Messenger
-- Briar Messenger
-- Syncthing
-- CUPS server
-- GIMP
-- Darktable
-- Viking
 - Emacs
+- GIMP
+- Golang 1.21.3
+- Htop
+- I3 wm
+- Keepassxc
+- Mc
+- Neomutt
+- Obsidian
+- Openssh
+- Python 3.11
+- Qemu
+- Signal Messenger
+- Spotify client
+- Syncthing
+- Telegram
+- Thunderbird
+- Torbrowser
 - Veracrypt 1.26.7
+- Viking
+- Vivaldi Browser
+- VLC
+- Zsh
 
