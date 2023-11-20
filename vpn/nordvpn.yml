@@ -1,0 +1,12 @@
+- hosts: localhost
+  become_user: root
+  tasks:
+    
+    - name: Download the installation script
+      get_url:
+         url: "https://downloads.nordcdn.com/apps/linux/install.sh"
+         dest: /tmp/nordvpn-install.sh
+
+    - name: Run the installation
+      become: true
+      command: sh /tmp/nordvpn-install.sh
