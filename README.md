@@ -25,9 +25,11 @@ git clone https://github.com/mikalai-dev/linuxenv.git && cd linuxenv && ./run.sh
 - Keepassxc
 - Mc
 - Neomutt
+- NordVPN CLI
 - Obsidian
 - Openssh
 - Python 3.11
+- ProtonVPN CLI
 - Qemu
 - Signal Messenger
 - Spotify client
