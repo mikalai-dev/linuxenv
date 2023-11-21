@@ -1,0 +1,3 @@
+[submodule "dotfiles"]
+	path = configs
+	url = git@github.com:mikalai-dev/dotfiles.git
