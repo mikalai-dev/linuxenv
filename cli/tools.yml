@@ -18,3 +18,10 @@
       copy:
         src: ../configs/.zshrc
         dest: ~/
+
+    - name: Copy mutt config
+      copy:
+        src: ../configs/.mutt
+        dest: ~/
+        recursive: yes
+       
