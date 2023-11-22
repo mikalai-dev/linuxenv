@@ -2,7 +2,7 @@
 
 ### Run
 ```
-git clone https://github.com/mikalai-dev/linuxenv.git && cd linuxenv && ./run.sh
+git clone --recursive https://github.com/mikalai-dev/linuxenv.git && cd linuxenv && ./run.sh
 ```
 
 
