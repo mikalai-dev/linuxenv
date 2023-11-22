@@ -16,12 +16,12 @@
 
     - name: Copy zshrc config
       copy:
-        src: ../configs/.zshrc
+        src: ../configs/dotfiles/.zshrc
         dest: ~/
 
     - name: Copy mutt config
       copy:
-        src: ../configs/.mutt
+        src: ../configs/dotfiles/.mutt
         dest: ~/
         recursive: yes
        

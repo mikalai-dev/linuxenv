@@ -16,6 +16,9 @@
     - name: Remove config directory
       command: rm -rf ~/.config/i3
 
-    - name: Download i3 config
-      command: git clone 'https://github.com/mikalai-dev/i3_config.git' ~/.config/i3
+    - name: Copy i3 config
+      copy:
+        src: ../configs/i3_config/
+        dest: ~/.config/i3
+        recursive: yess
 

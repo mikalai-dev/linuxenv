@@ -1,3 +1,6 @@
-[submodule "dotfiles"]
-	path = configs
-	url = git@github.com:mikalai-dev/dotfiles.git
+[submodule "configs/dotfiles"]
+	path = configs/dotfiles
+	url = git@github.com:mikalai-dev/dotfiles
+[submodule "configs/i3_config"]
+	path = configs/i3_config
+	url = git@github.com:mikalai-dev/i3_config
