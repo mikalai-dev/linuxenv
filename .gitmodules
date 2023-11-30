@@ -4,3 +4,6 @@
 [submodule "configs/i3_config"]
 	path = configs/i3_config
 	url = git@github.com:mikalai-dev/i3_config
+[submodule "configs/emacs_config"]
+	path = configs/emacs_config
+	url = git@github.com:mikalai-dev/emacs_config

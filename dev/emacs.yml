@@ -23,10 +23,10 @@
              - gcc-12
              - libmagickcore-dev
              - libmagick++-dev
-             - libtree-sitter-dev    
+             - libtree-sitter-dev
           state: latest
           update_cache: true
-    
+
       - name: Create directory for sources
         file:
            path: "{{ ansible_env.HOME }}/repo"
@@ -63,12 +63,12 @@
           chdir: "{{ ansible_env.HOME }}/repo/emacs"
         become: true
 
-      - name: Cloning the configuration
-        command: git clone 'https://github.com/mikalai-dev/emacs_config.git' ~/.emacs.d
-       
+      - name: Copy emacs config
+        copy:
+          src: ../configs/emacs_config
+          dest: ~/.emacs.d
+
       - name: Cleanup
         file:
           state: absent
           path: "{{ ansible_env.HOME }}/repo/emacs"
-
-    
