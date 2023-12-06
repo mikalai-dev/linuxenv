@@ -1,18 +1,20 @@
 - hosts: all
+  become_user: root
   tasks:
     - name: Add vivaldi repository key
       become: true
       apt_key:
          url: https://repo.vivaldi.com/stable/linux_signing_key.pub
-      when:
-         - ansible_distribution in ["Debian", "Ubuntu"]
-
+      tags:
+        - deb
 
     - name: Check if repository exists
       stat:
           path: /etc/apt/sources.list.d/vivaldi.list
       register:
           vivaldi_repo
+      tags:
+        - deb
 
     - name: Add repository
       become: true
@@ -21,15 +23,25 @@
           state: present
           filename: vivaldi
       when:
-        - ansible_distribution in ["Debian", "Ubuntu"]
         - vivaldi_repo.stat.exists == False
+      tags:
+        - deb
 
     - name: Install package
+      become: true
       apt:
         name: vivaldi-stable
         state: latest
-      when:
-        - ansible_distribution in ["Debian", "Ubuntu"]
+      tags:
+        - deb
+
+    - name: Install vivaldi browser
+      community.general.pacman:
+        name: vivaldi
+        state: present
+      become: true
+      tags:
+        - arch
 
 
 

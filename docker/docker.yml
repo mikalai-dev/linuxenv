@@ -10,7 +10,9 @@
         name: aptitude
         state: latest
         update_cache: true
-    
+      tags:
+        - deb
+
     - name: Install dependencies
       become: true
       apt:
@@ -24,18 +26,24 @@
           - python3-setuptools
         state: latest
         update_cache: true
+      tags:
+        - deb
 
     - name: Add Docker GPG apt Key
       become: true
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
+      tags:
+        - deb
 
     - name: Add Docker Repository
       become: true
       apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu focal stable
         state: present
+      tags:
+        - deb
 
     - name: "Docker: install"
       become: true
@@ -46,19 +54,42 @@
           - containerd.io
           - docker-buildx-plugin
           - docker-compose-plugin
+      tags:
+        - deb
     
     - name: "Install docker-compose version: {{ docker_compose_version }}"
       become: true
       command: 'curl -L "https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose'
+      tags:
+        - deb
 
     - name: Add execute permissions
       become: true
       file:
         path: /usr/local/bin/docker-compose
         mode: +x
-
+      tags:
+        - deb
     - name: Add current user to the docker group
       become: true
       user:
            name: "{{ ansible_user }}"
            groups: docker
+      tags:
+        - deb
+
+    - name: Install docker
+      community.general.pacman:
+        name: docker
+        state: present
+      become: true
+      tags:
+        - arch
+
+    - name: Install docker-compose
+      community.general.pacman:
+        name: docker-compose
+        state: present
+      become: true
+      tags:
+        - arch

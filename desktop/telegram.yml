@@ -6,35 +6,63 @@
            url: https://telegram.org/dl/desktop/linux
            dest: /tmp/telegram.tar.gz
       register: download_arch
+      tags:
+        - arch
+        - deb
 
     - name: Create destination directory
       become: true
       file:
            path: /opt/telegram
            state: directory
+      tags:
+        - arch
+        - deb
+
     - name: Extract archive
       become: true
-      unarchive:
+      ansible.builtin.unarchive:
            src: /tmp/telegram.tar.gz
-           dest: /opt/telegram
+           dest: /tmp
+           remote_src: yes
       when: download_arch.changed
+      tags:
+        - arch
+        - deb
+    
+    - name: Copy telegram to /opt
+      become: true
+      synchronize:
+           src: /tmp/Telegram
+           dest: /opt/telegram
+      tags:
+        - arch
+        - deb
 
     - name: Link the binary to /usr/bin
       become: true
       file:
-            src: /opt/telegram/Telegram
+            src: /opt/telegram/Telegram/Telegram
             dest: /usr/bin/telegram
             state: link
             force: yes
+      tags:
+        - arch
+        - deb
 
     - name: Change mode to executable
       become: true
       file:
             path: /usr/bin/telegram
             mode: 'u+x'
+      tags:
+        - arch
+        - deb
 
     - name: Cleanup
       file:
             state: absent
             path: /tmp/telegram.tar.gz
-      
+      tags:
+        - arch
+        - deb

@@ -7,4 +7,14 @@
            - torbrowser-launcher
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install torbrowser
+      become: true
+      community.general.pacman:
+        name: torbrowser-launcher
+        state: present
+      tags:
+        - arch
   

@@ -1,6 +1,6 @@
 - hosts: localhost
   tasks:
-    - name: Install
+    - name: Install CLI tools
       become: true
       apt:
         pkg:
@@ -11,17 +11,50 @@
            - cryptsetup
            - openssh-client
            - openssh-server
+           - net-tools
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install CLI tools
+      become: true
+      community.general.pacman:
+        name:
+          - mc
+          - htop
+          - neomutt
+          - zsh
+          - cryptsetup
+          - openssh
+          - net-tools
+        state: present
+      tags:
+        - arch
+
+    - name: Enable autostart of ssh server
+      become: true
+      ansible.builtin.service:
+        name: sshd
+        state: started
+        enabled: yes
+      tags:
+        - arch
+
 
     - name: Copy zshrc config
       copy:
         src: ../configs/dotfiles/.zshrc
         dest: ~/
-
+      tags:
+        - arch
+        - deb
+ 
     - name: Copy mutt config
-      copy:
+      synchronize:
         src: ../configs/dotfiles/.mutt
         dest: ~/
-        recursive: yes
+      tags:
+        - arch
+        - deb
        

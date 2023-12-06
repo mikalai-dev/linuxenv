@@ -6,12 +6,16 @@
       get_url:
         url: "https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Debian-12-amd64.deb"
         dest: "/tmp/veracrypt-1.26.7-Debian-12-amd64.deb"
+      tags:
+        - deb
 
     - name: Install VeraCrypt using dpkg
       become: true
       apt:
         deb: "/tmp/veracrypt-1.26.7-Debian-12-amd64.deb"
         state: present
+      tags:
+        - deb
 
     - name: Remove downloaded files
       file:
@@ -19,3 +23,14 @@
         state: absent
       loop:
         - "veracrypt-1.26.7-Debian-12-amd64.deb"
+      tags:
+        - deb
+
+    - name: Install VeraCrypt
+      become: true
+      community.general.pacman:
+        name:
+          - veracrypt
+        state: present
+      tags:
+        - arch

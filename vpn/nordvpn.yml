@@ -6,7 +6,13 @@
       get_url:
          url: "https://downloads.nordcdn.com/apps/linux/install.sh"
          dest: /tmp/nordvpn-install.sh
+      tags:
+        - arch
+        - deb
 
     - name: Run the installation
       become: true
       command: sh /tmp/nordvpn-install.sh
+      tags:
+        - arch
+        - deb

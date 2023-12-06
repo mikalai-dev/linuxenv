@@ -1,29 +1,41 @@
 - hosts: localhost
   tasks:
-      - name: Create the destination directory
-        become: true
-        file:
-             path: /usr/share/qflipper
-             state: directory
+    - name: Create the destination directory
+      become: true
+      file:
+        path: /usr/share/qflipper
+        state: directory
+      tags:
+        - arch
+        - deb
        
-      - name: Download the qFlipper build
-        become: true
-        get_url:
-             url: https://update.flipperzero.one/builds/qFlipper/1.3.3/qFlipper-x86_64-1.3.3.AppImage
-             dest: /usr/share/qflipper
+    - name: Download the qFlipper build
+      become: true
+      get_url:
+        url: https://update.flipperzero.one/builds/qFlipper/1.3.3/qFlipper-x86_64-1.3.3.AppImage
+        dest: /usr/share/qflipper
+      tags:
+        - arch
+        - deb
 
-      - name: Link the binary to /usr/bin
-        become: true
-        file:
-             src: /usr/share/qflipper/qFlipper-x86_64-1.3.3.AppImage
-             dest: /usr/bin/qflipper
-             state: link
-             force: yes
+    - name: Link the binary to /usr/bin
+      become: true
+      file:
+        src: /usr/share/qflipper/qFlipper-x86_64-1.3.3.AppImage
+        dest: /usr/bin/qflipper
+        state: link
+        force: yes
+      tags:
+        - arch
+        - deb
 
-      - name: Change mode to executable
-        become: true
-        file:
-             path: /usr/bin/qflipper
-             mode: '+x'
+    - name: Change mode to executable
+      become: true
+      file:
+        path: /usr/bin/qflipper
+        mode: '+x'
+      tags:
+        - arch
+        - deb
 
     

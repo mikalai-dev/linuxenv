@@ -11,6 +11,19 @@
            - qemu-utils
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install libvirt
+      become: true
+      community.general.pacman:
+        name:
+          - libvirt
+          - qemu-full
+          - virt-manager
+        state: present
+      tags:
+        - arch
     
     - name: Start libvirt
       service: libvirtd

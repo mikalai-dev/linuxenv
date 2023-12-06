@@ -1,20 +1,25 @@
 #!/bin/sh
 
 echo "Upgrading the system"
-sudo apt-get -y update
-sudo apt-get -y upgrade
 
-sudo apt-get install -y make ansible curl
+if [ -e /etc/os-release ]; then
+    source /etc/os-release
+    case "$ID" in
+        debian|ubuntu|linuxmint)
+            sudo apt-get -y update
+            sudo apt-get -y upgrade
+            sudo apt-get install -y make ansible curl
+            sudo chown -R $USER ~/.ansible
+            echo "Install the deb linux environment"
+            make deb_env
 
-sudo chown -R $USER ~/.ansible
-
-echo "Installing the environment"
-make create_env
-
-
-
-
-
-
-
-
+            ;;
+        arch|manjaro)
+            sudo pacman -Syu
+            sudo pacman -S make ansible curl --noconfirm
+            sudo chown -R $USER ~/.ansible
+            ansible-galaxy collection install community.general
+            echo "Install the arch linux environment"
+            make arch_env
+    esac
+fi

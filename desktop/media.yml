@@ -8,6 +8,16 @@
           - spotify-client
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install spotify client for manjaro
+      become: true
+      community.general.pacman:
+        name: spotify-launcher
+        state: present
+      tags:
+        - arch
 
     - name: Install vlc player
       become: true
@@ -16,6 +26,16 @@
           - vlc
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install vlc player
+      become: true
+      community.general.pacman:
+        name: vlc
+        state: present
+      tags:
+        - arch
 
     - name: Install Calibre
       become: true
@@ -24,9 +44,30 @@
           - calibre
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install Calibre
+      become: true
+      community.general.pacman:
+        name: calibre
+        state: present
+      tags:
+        - arch
 
     - name: Install documents viewer
       become: true
       apt:
         pkg:
-          - evince    
+          - evince
+      tags:
+        - deb
+
+    - name: Install documents viewer
+      become: true
+      community.general.pacman:
+        name: evince
+        state: present
+      tags:
+        - arch
+

@@ -7,3 +7,14 @@
             - gimp
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install GIMP
+      become: true
+      community.general.pacman:
+        name:
+          - gimp
+        state: present
+      tags:
+        - arch

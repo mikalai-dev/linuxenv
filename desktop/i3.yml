@@ -6,19 +6,39 @@
       become: true
       apt:
         pkg:
-           - i3-wm
-           - i3blocks
-           - i3lock
-           - rofi
+          - i3-wm
+          - i3blocks
+          - i3lock
+          - rofi
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install i3 window manager
+      become: true
+      community.general.pacman:
+        name:
+          - i3-wm
+          - i3blocks
+          - i3lock
+          - rofi
+        state: present
+      tags:
+        - arch
+        
     
     - name: Remove config directory
       command: rm -rf ~/.config/i3
+      tags:
+        - arch
+        - deb
 
     - name: Copy i3 config
-      copy:
+      synchronize:
         src: ../configs/i3_config/
         dest: ~/.config/i3
-        recursive: yess
+      tags:
+        - arch
+        - deb
 

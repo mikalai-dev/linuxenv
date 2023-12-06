@@ -7,10 +7,24 @@
           - syncthing
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install syncthing
+      become: true
+      community.general.pacman:
+        name:
+          - syncthing
+        state: present
+      tags:
+        - arch
 
     - name: Get current username
       set_fact:
           current_user: "{{ ansible_env.USER }}"
+      tags:
+        - deb
+        - arch
     
     - name: Enable syncthing autostart on login
       become: true
@@ -18,4 +32,10 @@
         name: syncthing@{{ current_user }}
         state: started
         enabled: true
+      tags:
+        - deb
+        - arch
+        
+
+    
       

@@ -8,4 +8,15 @@
             - keepassxc
         state: latest
         update_cache: true
- 
+      tags:
+        - deb
+
+    - name: Install keepassxc from repository
+      become: true
+      community.general.pacman:
+        name: keepassxc
+        state: present
+      tags:
+        - arch
+
+        

@@ -8,13 +8,19 @@
       get_url:
         url: https://desktop.briarproject.org/debs/jammy/briar-desktop-ubuntu-22.04.deb
         dest: /tmp/briar-desktop.deb
+      tags:
+        - deb
 
     - name: Install the package
       apt:
         deb: /tmp/briar-desktop.deb
         state: present
+      tags:
+        - deb
 
     - name: Cleanup
       file:
         state: absent
         path: /tmp/briar-desktop.deb
+      tags:
+        - deb

@@ -1,10 +1,12 @@
-- hosts: all
+- hosts: localhost
   become_user: root
   tasks:
     - name: Check if keyring exists
       ansible.builtin.stat:
         path: /usr/share/keyrings/brave-browser-archive-keyring.gpg
       register: keyring_file
+      tags:
+        - deb
 
     - name: Get keyring file
       ansible.builtin.get_url:
@@ -13,6 +15,8 @@
         mode: "0644"
       when: not keyring_file.stat.exists
       become: true
+      tags:
+        - deb
 
     - name: Add Brave repository to list of repositories
       become: true
@@ -21,6 +25,8 @@
         content: |
           deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
         mode: "0644"
+      tags:
+        - deb
 
     - name: Install Brave
       ansible.builtin.apt:
@@ -28,3 +34,13 @@
         state: present
         update_cache: true
       become: true
+      tags:
+        - deb
+
+    - name: Install Brave
+      community.general.pacman:
+        name: brave-browser
+        state: present
+      become: true
+      tags:
+        - arch

@@ -7,26 +7,41 @@
         state: present
       loop:
         - curl
+      tags:
+        - arch
+        - deb
 
     - name: Fetch latest nightly release version
       uri:
         url: https://api.github.com/repos/darktable-org/darktable/releases/tags/nightly
         return_content: yes
       register: nightly_release
+      tags:
+        - arch
+        - deb
 
     - name: Get download URL for Nightly AppImage release
       set_fact:
          download_url: "{{ nightly_release.json.assets | selectattr('name', 'match', '^Darktable.*AppImage$') | map(attribute='browser_download_url') | first }}"
+      tags:
+        - arch
+        - deb
 
     - name: Print download URL
       debug:
           var: download_url
+      tags:
+        - arch
+        - deb
 
     - name: Create destination directory /opt/darktable
       become: yes
       file:
          path: "/opt/darktable"
          state: directory
+      tags:
+        - arch
+        - deb
     
     - name: Download Nightly Darktable AppImage
       become: yes
@@ -35,6 +50,9 @@
         dest: "/opt/darktable/darktable.AppImage"
         mode: 0755
       register: download_appimage
+      tags:
+        - arch
+        - deb
 
     - name: Create a symlink to /usr/bin
       become: yes
@@ -43,3 +61,6 @@
         dest: "/usr/bin/darktable"
         state: link
       when: download_appimage.changed
+      tags:
+        - arch
+        - deb

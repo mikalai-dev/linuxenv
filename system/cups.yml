@@ -1,10 +1,20 @@
 - hosts: localhost
   tasks:
-    - name: Install syncthing
+    - name: Install cups
       become: true
       apt:
         pkg:
           - cups
         state: latest
         update_cache: true
-      
+      tags:
+        - deb
+
+    - name: Install cups
+      become: true
+      community.general.pacman:
+        name:
+          - cups
+        state: present
+      tags:
+        - arch

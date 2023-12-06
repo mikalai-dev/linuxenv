@@ -8,4 +8,34 @@
           - arduino-core
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Create destination directory
+      become: true
+      file:
+        path: /opt/arduino
+        state: directory
+      tags:
+        - arch
+
+    - name: Copy IDE to /opt/arduino
+      become: yes
+      get_url:
+        url: https://downloads.arduino.cc/arduino-ide/arduino-ide_2.2.1_Linux_64bit.AppImage
+        dest: /opt/arduino/arduino-ide
+        mode: 0755
+      register: download_appimg
+      tags:
+        - arch
+
+    - name: Create a symlink to /usr/bin
+      become: yes
+      file: 
+         src: /opt/arduino/arduino-ide
+         dest: /usr/bin/arduino-ide
+         state: link
+      when: download_appimg.changed
+      tags:
+         - arch
  

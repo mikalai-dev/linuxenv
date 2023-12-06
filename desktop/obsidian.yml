@@ -6,12 +6,17 @@
         url: https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest
         return_content: yes
       register: github_release
+      tags:
+        - deb
+          
 
     - name: Find the .deb package URL in the release assets
       set_fact:
         deb_package_url: "{{ item.browser_download_url }}"
       loop: "{{ github_release.json.assets }}"
       when: item.name | regex_search('.*\\.deb$')
+      tags:
+        - deb
 
     - name: Download the latest obsidian .deb package
       get_url:
@@ -19,13 +24,28 @@
         dest: /tmp/obsidian.deb
       delegate_to: localhost
       when: deb_package_url is defined
+      tags:
+        - deb
 
     - name: Install the downloaded package
       apt:
         deb: /tmp/obsidian.deb
       become: yes
+      tags:
+        - deb
 
     - name: Cleanup
       file:
            state: absent
            path: /tmp/obsidian.deb
+      tags:
+        - deb
+
+    - name: Install obsidian from the repository
+      community.general.pacman:
+        name: obsidian
+        state: present
+      become: true
+      tags:
+        - arch
+    

@@ -1,5 +1,13 @@
 # Linux environment automated installation
 
+## Changelog
+
+- November, 30th 2023
+  First release. Automated installation of linux-environment for deb-based distribution implemented
+
+- December, 12th 2023
+  Cosmetic fixes. Arch-based linux distribution support added
+
 ### Run
 ```
 git clone --recursive https://github.com/mikalai-dev/linuxenv.git && cd linuxenv && ./run.sh

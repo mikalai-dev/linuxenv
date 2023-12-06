@@ -26,49 +26,78 @@
              - libtree-sitter-dev
           state: latest
           update_cache: true
+        tags:
+          - deb
 
       - name: Create directory for sources
         file:
            path: "{{ ansible_env.HOME }}/repo"
            state: directory
+        tags:
+          - deb
 
       - name: Clone emacs repo
         git:
           repo: 'git://git.sv.gnu.org/emacs.git'
           dest: "{{ ansible_env.HOME }}/repo/emacs"
           version: master
+        tags:
+          - deb
 
       - name: Create ./configure file
         shell:
             cmd: sh autogen.sh
             chdir: "{{ ansible_env.HOME }}/repo/emacs"
+        tags:
+          - deb
 
       - name: Configure emacs
         shell:
             cmd: sh configure
             chdir: "{{ ansible_env.HOME }}/repo/emacs"
+        tags:
+          - deb
 
       - name: Get the number of cores
         command: nproc --all
         register: nproc
+        tags:
+          - deb
 
       - name: Build emacs
         shell:
           cmd: make -j{{ nproc.stdout }}
           chdir: "{{ ansible_env.HOME }}/repo/emacs"
+        tags:
+          - deb
 
       - name: Install
         shell:
           cmd: make install
           chdir: "{{ ansible_env.HOME }}/repo/emacs"
         become: true
+        tags:
+          - deb
+
+      - name: Install emacs from repo
+        become: true
+        community.general.pacman:
+          name: emacs
+          state: present
+        tags:
+          - arch
 
       - name: Copy emacs config
-        copy:
-          src: ../configs/emacs_config
+        synchronize:
+          src: ../configs/emacs_config/
           dest: ~/.emacs.d
+        tags:
+          - arch
+          - dev
 
       - name: Cleanup
         file:
           state: absent
           path: "{{ ansible_env.HOME }}/repo/emacs"
+        tags:
+          - deb

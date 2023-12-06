@@ -8,4 +8,23 @@
           - josm
         state: latest
         update_cache: true
+      tags:
+        - deb
+
+    - name: Install viking
+      community.general.pacman:
+        name: viking
+        state: present
+      become: true
+      tags:
+        - arch
+
+    - name: Install josm
+      community.general.pacman:
+        name:
+          - josm
+          - jdk-openjdk
+      become: true
+      tags:
+        - arch
     

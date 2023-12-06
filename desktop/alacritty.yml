@@ -18,12 +18,28 @@
           - libxrandr-dev
           - libxi-dev
           - cargo
+      tags:
+        - deb
 
 
     - name: Build and install Alacritty
       command: cargo install alacritty
+      tags:
+        - deb
+
+    - name: Install alacritty
+      community.general.pacman:
+        name: alacritty
+        state: present
+      become: true
+      tags:
+        - arch
 
     - name: Copy alacritty config
       copy:
-         src: ../configs/alacritty.yml
+         src: ../configs/dotfiles/alacritty.yml
          dest: ~/.config
+      tags:
+        - arch
+        - deb
+         

@@ -9,6 +9,8 @@
       get_url:
         url: "https://golang.org/dl/go{{ go_version }}.linux-{{ sys_architecture }}.tar.gz"
         dest: "/tmp/go.tar.gz"
+      tags:
+        - deb
 
     - name: Extract Go archive
       become: true
@@ -16,6 +18,16 @@
         src: "/tmp/go.tar.gz"
         dest: "/usr/local"
         remote_src: yes
+      tags:
+        - deb
+
+    - name: Install Go from the repository
+      become: true
+      community.general.pacman:
+        name: go
+        state: present
+      tags:
+        - arch
 
     - name: Add Go Environment variables to shell profile
       lineinfile:
@@ -25,12 +37,20 @@
       with_items:
         - "export PATH=$PATH:/usr/local/go/bin"
         - "export GOPATH=$HOME/go"
+      tags:
+        - arch
+        - deb
 
     - name: Install go-pls server
       environment:
          PATH: "{{ ansible_env.PATH }}:/usr/local/go/bin"
       command: go install golang.org/x/tools/gopls@latest
+      tags:
+        - arch
+        - deb
 
     - name: Cleanup the downloaded archive
       become: true
-      command: rm /tmp/go.tar.gz 
+      command: rm /tmp/go.tar.gz
+      tags:
+        - deb

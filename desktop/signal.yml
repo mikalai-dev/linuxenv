@@ -5,18 +5,35 @@
       apt_key:
         url: https://updates.signal.org/desktop/apt/keys.asc
       register: key_result
+      tags:
+        - deb
 
     - name: Add Signal APT repository
       apt_repository:
         repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
         state: present
       when: key_result.changed
+      tags:
+        - deb
 
     - name: Update APT package cache
       apt:
         update_cache: yes
+      tags:
+        - deb
 
     - name: Install Signal Messenger
       apt:
         name: signal-desktop
         state: present
+      tags:
+        - deb
+
+    - name: Install Signal Messenger
+      become: true
+      community.general.pacman:
+        name: signal-desktop
+        state: present
+      tags:
+        - arch
+      
