@@ -27,4 +27,28 @@
       become: true
       tags:
         - arch
-    
+
+    - name: Backup for the default josm start script
+      command: mv /usr/bin/josm /usr/bin/josm-backup 
+      become: true
+      tags:
+        - arch
+
+    - name: Creating new /usr/bin/josm
+      ansible.builtin.file:
+        path: /usr/bin/josm
+        state: touch
+        mode: 0755
+      become: true
+      tags:
+        - arch
+
+    - name: Adding of workaround for josm bug https://bugs.archlinux.org/task/78707
+      lineinfile:
+        path: /usr/bin/josm
+        line: |
+          #!/bin/bash
+          java -jar /usr/share/java/josm/josm.jar
+      become: true
+      tags:
+        - arch
