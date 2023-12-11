@@ -15,11 +15,10 @@ if [ -e /etc/os-release ]; then
 
             ;;
         arch|manjaro)
-            sudo pacman -Syu
+            sudo pacman -Syu --noconfirm
             sudo pacman -S make ansible curl --noconfirm
             sudo chown -R $USER ~/.ansible
             ansible-galaxy collection install community.general
             echo "Install the arch linux environment"
             make arch_env
     esac
-fi
