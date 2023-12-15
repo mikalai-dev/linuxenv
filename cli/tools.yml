@@ -12,6 +12,7 @@
            - openssh-client
            - openssh-server
            - net-tools
+           - aria2
         state: latest
         update_cache: true
       tags:
@@ -28,6 +29,7 @@
           - cryptsetup
           - openssh
           - net-tools
+          - aria2
         state: present
       tags:
         - arch
