@@ -13,6 +13,7 @@ deb_env:
 	ansible-playbook desktop/briar.yml -i local -vv --tags=deb
 	ansible-playbook desktop/gis.yml -i local -vv --tags=deb
 	ansible-playbook desktop/flipper.yml -i local --tags=deb -vv
+	ansible-playbook desktop/gqrx.yml -i local --tags=deb -vv
 	ansible-playbook dev/python.yml -i local -vv --tags=deb
 	ansible-playbook dev/golang.yml -i local -vv --tags=deb
 	ansible-playbook dev/arduino.yml -i local -vv --tags=deb
@@ -39,6 +40,7 @@ arch_env:
 	ansible-playbook desktop/briar.yml -i local --tags=arch -vv
 	ansible-playbook desktop/gis.yml -i local --tags=arch -vv
 	ansible-playbook desktop/flipper.yml -i local --tags=arch -vv
+	ansible-playbook desktop/gqrx.yml -i local --tags=arch -vv
 	ansible-playbook dev/python.yml -i local --tags=arch -vv
 	ansible-playbook dev/golang.yml -i local --tags=arch -vv
 	ansible-playbook dev/arduino.yml -i local --tags=arch -vv

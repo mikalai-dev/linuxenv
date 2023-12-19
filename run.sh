@@ -22,3 +22,4 @@ if [ -e /etc/os-release ]; then
             echo "Install the arch linux environment"
             make arch_env
     esac
+fi
