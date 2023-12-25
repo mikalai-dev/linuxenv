@@ -13,6 +13,10 @@
            - openssh-server
            - net-tools
            - aria2
+           - lsof
+           - wireguard-tools
+           - make
+           - cmake
         state: latest
         update_cache: true
       tags:
@@ -30,6 +34,11 @@
           - openssh
           - net-tools
           - aria2
+          - lsof
+          - xinput-xorg
+          - wireguard-tools
+          - make
+          - cmake
         state: present
       tags:
         - arch
