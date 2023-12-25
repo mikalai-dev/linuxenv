@@ -8,6 +8,7 @@
         pkg: 
           - python3.11
           - python3-pip
+          - ipython3
         state: latest
         update_cache: true
       tags:
@@ -29,6 +30,7 @@
         name:
           - python3
           - python-pip
+          - ipython
         state: present
       tags:
         - arch
