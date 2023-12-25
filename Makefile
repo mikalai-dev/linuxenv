@@ -21,6 +21,7 @@ deb_env:
 	ansible-playbook cli/tools.yml -i local -vv --tags=deb
 	ansible-playbook graphics/gimp.yml -i local --tags=deb -vv
 	ansible-playbook graphics/darktable.yml -i local --tags=deb -vv
+	ansible-playbook graphics/tools.yml -i local --tags=deb -vv
 	ansible-playbook system/syncthing.yml -i local --tags=deb -vv
 	ansible-playbook system/cups.yml -i local --tags=deb -vv
 	ansible-playbook system/veracrypt.yml -i local --tags=deb -vv
@@ -48,6 +49,7 @@ arch_env:
 	ansible-playbook cli/tools.yml -i local --tags=arch -vv
 	ansible-playbook graphics/gimp.yml -i local --tags=arch -vv
 	ansible-playbook graphics/darktable.yml -i local --tags=arch -vv
+	ansible-playbook graphics/tools.yml -i local --tags=arch -vv
 	ansible-playbook system/syncthing.yml -i local --tags=arch -vv
 	ansible-playbook system/cups.yml -i local --tags=arch -vv
 	ansible-playbook system/veracrypt.yml -i local --tags=arch -vv
