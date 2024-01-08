@@ -24,3 +24,30 @@
         path: /tmp/briar-desktop.deb
       tags:
         - deb
+
+    - name: Create directory for briar
+      become: true
+      file:
+        path: /usr/share/briar
+        state: directory
+      tags:
+        - arch
+
+    - name: Download the Briar jar
+      become: true
+      get_url:
+        url: https://desktop.briarproject.org/jars/linux/briar-desktop-linux.jar
+        dest: /usr/share/briar/briar-desktop-linux.jar
+      tags:
+        - arch
+
+    - name: Create executing script for briar desktop
+      become: true
+      copy:
+        content: |
+          #!/bin/bash
+          java -jar /usr/share/briar/briar-desktop-linux.jar
+        dest: /usr/bin/briar
+        mode: 0755
+      tags:
+        - arch
