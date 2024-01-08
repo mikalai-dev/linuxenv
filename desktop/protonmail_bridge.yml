@@ -1,0 +1,47 @@
+- hosts: localhost
+  become_user: root
+  tasks:
+    - name: Download Proton Mail Bridge for debian
+      get_url:
+        url: https://proton.me/download/bridge/protonmail-bridge_3.7.1-1_amd64.deb
+        dest: /tmp/protonmail-bridge.deb
+      tags:
+        - deb
+
+    - name: Install the downloaded package
+      become: true
+      apt:
+        deb: /tmp/protonmail-bridge.deb
+      tags:
+        - deb
+
+    - name: Download Proton Mail Bridge rpm package
+      get_url:
+        url: https://proton.me/download/bridge/protonmail-bridge-3.7.1-1.x86_64.rpm
+        dest: /tmp/protonmail-bridge.x86_64.rpm
+      tags:
+        - rpm
+        - arch
+
+    - name: Install rpm2extract package
+      become: true
+      pacman:
+        name: rpmextract
+        state: present
+      tags:
+        - arch
+
+    - name: Extract the downloaded rpm package
+      shell: rpmextract.sh protonmail-bridge.x86_64.rpm
+      args:
+        chdir: /tmp
+      tags:
+        - arch
+
+    - name: Copy bin directory
+      become: true
+      copy:
+        src: /tmp/usr/bin
+        dest: /usr/bin
+      tags:
+        - arch

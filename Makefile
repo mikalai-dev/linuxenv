@@ -42,6 +42,7 @@ arch_env:
 	ansible-playbook desktop/gis.yml -i local --tags=arch -vv
 	ansible-playbook desktop/flipper.yml -i local --tags=arch -vv
 	ansible-playbook desktop/gqrx.yml -i local --tags=arch -vv
+	ansible-playbook desktop/protonmail_bridge.yml -i local --tags=arch -vv
 	ansible-playbook dev/python.yml -i local --tags=arch -vv
 	ansible-playbook dev/golang.yml -i local --tags=arch -vv
 	ansible-playbook dev/arduino.yml -i local --tags=arch -vv
