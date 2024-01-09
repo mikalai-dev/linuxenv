@@ -1,12 +1,13 @@
 - hosts: all
+  become: true
   vars:
     docker_compose_version: "2.23.0"
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install aptitude
       apt:
         name: aptitude
+        state: latest
+        update_cache: true
       tags:
         - deb
 
@@ -20,6 +21,8 @@
           - python3-pip
           - virtualenv
           - python3-setuptools
+        state: latest
+        update_cache: true
       tags:
         - deb
 
@@ -43,6 +46,8 @@
           - containerd.io
           - docker-buildx-plugin
           - docker-compose-plugin
+        state: latest
+        update_cache: true
       tags:
         - deb
     
@@ -68,13 +73,15 @@
     - name: Install docker
       community.general.pacman:
         name: docker
-        state: present
+        state: latest
+        update_cache: true
       tags:
         - arch
 
     - name: Install docker-compose
       community.general.pacman:
         name: docker-compose
-        state: present
+        state: latest
+        update_cache: true
       tags:
         - arch

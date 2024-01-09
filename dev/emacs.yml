@@ -1,6 +1,5 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
       - name: Install dependencies
         apt:
@@ -24,6 +23,8 @@
              - libmagickcore-dev
              - libmagick++-dev
              - libtree-sitter-dev
+          state: latest
+          update_cache: true          
         tags:
           - deb
 
@@ -79,7 +80,8 @@
       - name: Install emacs from repo
         community.general.pacman:
           name: emacs
-          state: present
+          state: latest
+          update_cache: true
         tags:
           - arch
 

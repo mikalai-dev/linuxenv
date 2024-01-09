@@ -1,6 +1,5 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Check if keyring exists
       ansible.builtin.stat:
@@ -15,12 +14,10 @@
         dest: "/usr/share/keyrings/brave-browser-archive-keyring.gpg"
         mode: "0644"
       when: not keyring_file.stat.exists
-      become: true
       tags:
         - deb
 
     - name: Add Brave repository to list of repositories
-      become: true
       ansible.builtin.copy:
         dest: /etc/apt/sources.list.d/brave-browser-release.list
         content: |
@@ -34,7 +31,6 @@
         name: brave-browser
         state: present
         update_cache: true
-      become: true
       tags:
         - deb
 
@@ -42,6 +38,5 @@
       community.general.pacman:
         name: brave-browser
         state: present
-      become: true
       tags:
         - arch

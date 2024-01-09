@@ -1,6 +1,5 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Install Python 3.11
       apt:
@@ -8,6 +7,8 @@
           - python3.11
           - python3-pip
           - ipython3
+        state: latest
+        update_cache: true
       tags:
         - deb
         - python
@@ -25,6 +26,8 @@
           - python3
           - python-pip
           - ipython
+        state: latest
+        update_cache: true
       tags:
         - arch
 
@@ -38,5 +41,7 @@
       community.general.pacman:
         name:
           - python-lsp-server
+        state: latest
+        update_cache: true
       tags:
         - arch

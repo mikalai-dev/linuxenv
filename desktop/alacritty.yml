@@ -1,6 +1,5 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: yes
   tasks:
     - name: Install dependencies
       apt:
@@ -19,6 +18,8 @@
           - libxrandr-dev
           - libxi-dev
           - cargo
+        state: latest
+        update_cache: true
       tags:
         - deb
 
@@ -31,7 +32,8 @@
     - name: Install alacritty
       community.general.pacman:
         name: alacritty
-        state: present
+        state: latest
+        update_cache: true
       tags:
         - arch
 

@@ -1,7 +1,5 @@
 - hosts: all
-  become_user: root
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Install i3 window manager
       apt:
@@ -10,6 +8,8 @@
           - i3blocks
           - i3lock
           - rofi
+        state: latest
+        update_cache: true
       tags:
         - deb
 
@@ -20,6 +20,8 @@
           - i3blocks
           - i3lock
           - rofi
+        state: latest
+        update_cache: true
       tags:
         - arch
         

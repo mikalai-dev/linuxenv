@@ -10,6 +10,8 @@
            - virt-manager
            - qemu-img
            - qemu-utils
+        state: latest
+        update_cache: true
       tags:
         - deb
 
@@ -19,6 +21,8 @@
           - libvirt
           - qemu-full
           - virt-manager
+        state: latest
+        update_cache: true
       tags:
         - arch
     

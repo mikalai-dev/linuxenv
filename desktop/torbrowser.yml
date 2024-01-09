@@ -6,12 +6,16 @@
       apt:
         pkg:
            - torbrowser-launcher
+        state: latest
+        update_cache: true
       tags:
         - deb
 
     - name: Install torbrowser
       community.general.pacman:
         name: torbrowser-launcher
+        state: latest
+        update_cache: true
       tags:
         - arch
   

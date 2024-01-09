@@ -23,7 +23,8 @@
     - name: Install Go from the repository
       community.general.pacman:
         name: go
-        state: present
+        state: latest
+        update_cache: true
       tags:
         - arch
 

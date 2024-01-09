@@ -1,11 +1,12 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Install syncthing
       apt:
         pkg:
           - syncthing
+        state: latest
+        update_cache: true
       tags:
         - deb
 
@@ -13,6 +14,8 @@
       community.general.pacman:
         name:
           - syncthing
+        state: latest
+        update_cache: true
       tags:
         - arch
 

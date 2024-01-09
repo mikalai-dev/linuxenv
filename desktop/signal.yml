@@ -1,6 +1,5 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Add Signal APT repository key
       apt_key:
@@ -19,12 +18,16 @@
     - name: Install Signal Messenger
       apt:
         name: signal-desktop
+        state: latest
+        update_cache: true
       tags:
         - deb
 
     - name: Install Signal Messenger
       community.general.pacman:
         name: signal-desktop
+        state: latest
+        update_cache: true
       tags:
         - arch
       

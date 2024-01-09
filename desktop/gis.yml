@@ -1,19 +1,21 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Install viking
       apt:
         pkg:
           - viking
           - josm
+        state: latest
+        update_cache: true
       tags:
         - deb
 
     - name: Install viking
       community.general.pacman:
         name: viking
-        state: present
+        state: latest
+        update_cache: true
       tags:
         - arch
 
@@ -22,6 +24,8 @@
         name:
           - josm
           - jdk-openjdk
+        state: latest
+        update_cache: true
       tags:
         - arch
 

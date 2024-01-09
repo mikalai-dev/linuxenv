@@ -1,18 +1,20 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Install spotify client
       apt:
         pkg:
           - spotify-client
+        state: latest
+        update_cache: true
       tags:
         - deb
 
     - name: Install spotify client for manjaro
       community.general.pacman:
         name: spotify-launcher
-        state: present
+        state: latest
+        update_cache: true
       tags:
         - arch
 
@@ -20,12 +22,16 @@
       apt:
         pkg:
           - vlc
+        state: latest
+        update_cache: true
       tags:
         - deb
 
     - name: Install vlc player
       community.general.pacman:
         name: vlc
+        state: latest
+        update_cache: true
       tags:
         - arch
 
@@ -39,6 +45,8 @@
     - name: Install Calibre
       community.general.pacman:
         name: calibre
+        state: latest
+        update_cache: true
       tags:
         - arch
 
@@ -46,12 +54,16 @@
       apt:
         pkg:
           - evince
+        state: latest
+        update_cache: true
       tags:
         - deb
 
     - name: Install documents viewer
       community.general.pacman:
         name: evince
+        state: latest
+        update_cache: true
       tags:
         - arch
 

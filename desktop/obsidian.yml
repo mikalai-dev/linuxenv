@@ -1,6 +1,5 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Get the latest release information from GitHub
       uri:
@@ -44,6 +43,8 @@
     - name: Install obsidian from the repository
       community.general.pacman:
         name: obsidian
+        state: latest
+        update_cache: true
       tags:
         - arch
     

@@ -28,5 +28,7 @@
       community.general.pacman:
         name:
           - veracrypt
+        state: latest
+        update_cache: true
       tags:
         - arch

@@ -1,12 +1,13 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Install Arduino IDE
       apt:
         pkg:
           - arduino
           - arduino-core
+        state: latest
+        update_cache: true
       tags:
         - deb
 

@@ -1,6 +1,5 @@
 - hosts: all
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Download telegram messenger
       get_url:

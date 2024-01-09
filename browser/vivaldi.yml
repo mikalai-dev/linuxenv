@@ -1,6 +1,5 @@
 - hosts: all
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Add vivaldi repository key
       apt_key:
