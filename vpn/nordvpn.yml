@@ -1,5 +1,6 @@
 - hosts: localhost
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     
     - name: Download the installation script
@@ -11,7 +12,6 @@
         - deb
 
     - name: Run the installation
-      become: true
       command: sh /tmp/nordvpn-install.sh
       tags:
         - arch

@@ -1,20 +1,17 @@
 - hosts: localhost
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install thunderbird
-      become: true
       apt:
         pkg:
            - thunderbird
-        state: latest
-        update_cache: true
       tags:
         - deb
 
     - name: Install thunderbird
       community.general.pacman:
         name: thunderbird
-        state: present
-      become: true
       tags:
         - arch
       

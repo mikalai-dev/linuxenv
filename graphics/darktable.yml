@@ -1,6 +1,8 @@
 - hosts: localhost
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
+
     - name: Ensure required packages are installed
       package:
         name: "{{ item }}"

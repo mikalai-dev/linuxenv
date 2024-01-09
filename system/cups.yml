@@ -1,20 +1,17 @@
 - hosts: localhost
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install cups
-      become: true
       apt:
         pkg:
           - cups
-        state: latest
-        update_cache: true
       tags:
         - deb
 
     - name: Install cups
-      become: true
       community.general.pacman:
         name:
           - cups
-        state: present
       tags:
         - arch

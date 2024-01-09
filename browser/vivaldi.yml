@@ -1,8 +1,8 @@
 - hosts: all
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Add vivaldi repository key
-      become: true
       apt_key:
          url: https://repo.vivaldi.com/stable/linux_signing_key.pub
       tags:
@@ -17,7 +17,6 @@
         - deb
 
     - name: Add repository
-      become: true
       apt_repository:
           repo: "deb https://repo.vivaldi.com/stable/deb/ stable main"
           state: present
@@ -39,7 +38,6 @@
       community.general.pacman:
         name: vivaldi
         state: present
-      become: true
       tags:
         - arch
 

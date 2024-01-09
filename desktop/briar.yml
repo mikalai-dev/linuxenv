@@ -1,10 +1,9 @@
 - hosts: localhost
-  become: yes
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
 
   tasks:
     - name: Download the package
-      become: true
       get_url:
         url: https://desktop.briarproject.org/debs/jammy/briar-desktop-ubuntu-22.04.deb
         dest: /tmp/briar-desktop.deb
@@ -26,7 +25,6 @@
         - deb
 
     - name: Create directory for briar
-      become: true
       file:
         path: /usr/share/briar
         state: directory
@@ -34,7 +32,6 @@
         - arch
 
     - name: Download the Briar jar
-      become: true
       get_url:
         url: https://desktop.briarproject.org/jars/linux/briar-desktop-linux.jar
         dest: /usr/share/briar/briar-desktop-linux.jar
@@ -42,7 +39,6 @@
         - arch
 
     - name: Create executing script for briar desktop
-      become: true
       copy:
         content: |
           #!/bin/bash

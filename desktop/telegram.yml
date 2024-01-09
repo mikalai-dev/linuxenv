@@ -1,5 +1,6 @@
 - hosts: all
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Download telegram messenger
       get_url:
@@ -11,7 +12,6 @@
         - deb
 
     - name: Create destination directory
-      become: true
       file:
            path: /opt/telegram
            state: directory
@@ -20,7 +20,6 @@
         - deb
 
     - name: Extract archive
-      become: true
       ansible.builtin.unarchive:
            src: /tmp/telegram.tar.gz
            dest: /tmp
@@ -31,7 +30,6 @@
         - deb
     
     - name: Copy telegram to /opt
-      become: true
       synchronize:
            src: /tmp/Telegram
            dest: /opt/telegram
@@ -40,7 +38,6 @@
         - deb
 
     - name: Link the binary to /usr/bin
-      become: true
       file:
             src: /opt/telegram/Telegram/Telegram
             dest: /usr/bin/telegram
@@ -51,7 +48,6 @@
         - deb
 
     - name: Change mode to executable
-      become: true
       file:
             path: /usr/bin/telegram
             mode: 'u+x'

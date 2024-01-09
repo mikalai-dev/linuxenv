@@ -1,5 +1,6 @@
 - hosts: localhost
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Get the latest release information from GitHub
       uri:
@@ -30,7 +31,6 @@
     - name: Install the downloaded package
       apt:
         deb: /tmp/obsidian.deb
-      become: yes
       tags:
         - deb
 
@@ -44,8 +44,6 @@
     - name: Install obsidian from the repository
       community.general.pacman:
         name: obsidian
-        state: present
-      become: true
       tags:
         - arch
     

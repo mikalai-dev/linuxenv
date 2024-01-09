@@ -1,21 +1,17 @@
 - hosts: localhost
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install KeepassXC
-      become: true
       apt:
         pkg:
             - keepassxc
-        state: latest
-        update_cache: true
       tags:
         - deb
 
     - name: Install keepassxc from repository
-      become: true
       community.general.pacman:
         name: keepassxc
-        state: present
       tags:
         - arch
 

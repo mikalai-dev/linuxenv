@@ -1,7 +1,8 @@
 - hosts: localhost
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install graphics tools
-      become: true
       apt:
         pkg:
           - feh
@@ -10,10 +11,8 @@
         - deb
 
     - name: Install graphics tools
-      become: true
       community.general.pacman:
         name:
           - gimp
-        state: present
       tags:
         - arch

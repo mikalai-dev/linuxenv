@@ -1,11 +1,11 @@
 - hosts: localhost
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   vars:
     go_version: "1.21.4"
     sys_architecture: "amd64"
   tasks:
     - name: Download Go binary
-      become: true
       get_url:
         url: "https://golang.org/dl/go{{ go_version }}.linux-{{ sys_architecture }}.tar.gz"
         dest: "/tmp/go.tar.gz"
@@ -13,7 +13,6 @@
         - deb
 
     - name: Extract Go archive
-      become: true
       ansible.builtin.unarchive:
         src: "/tmp/go.tar.gz"
         dest: "/usr/local"
@@ -22,7 +21,6 @@
         - deb
 
     - name: Install Go from the repository
-      become: true
       community.general.pacman:
         name: go
         state: present
@@ -50,7 +48,6 @@
         - deb
 
     - name: Cleanup the downloaded archive
-      become: true
       command: rm /tmp/go.tar.gz
       tags:
         - deb

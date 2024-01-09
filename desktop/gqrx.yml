@@ -1,22 +1,18 @@
  - hosts: all
-   become_user: root
+   roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
 
    tasks:
      - name: Install gqrx
-       become: true
        apt:
          pkg:
            - gqrx-sdr
-         state: latest
-         update_cache: true
        tags:
          - deb
 
      - name: Install gqrx
-       become: true
        community.general.pacman:
          name:
            - gqrx
-         state: present
        tags:
          - arch

@@ -1,7 +1,8 @@
 - hosts: localhost
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install CLI tools
-      become: true
       apt:
         pkg:
            - mc
@@ -17,13 +18,10 @@
            - wireguard-tools
            - make
            - cmake
-        state: latest
-        update_cache: true
       tags:
         - deb
 
     - name: Install CLI tools
-      become: true
       community.general.pacman:
         name:
           - mc
@@ -35,16 +33,14 @@
           - net-tools
           - aria2
           - lsof
-          - xinput-xorg
+          - xorg-xinput
           - wireguard-tools
           - make
           - cmake
-        state: present
       tags:
         - arch
 
     - name: Enable autostart of ssh server
-      become: true
       ansible.builtin.service:
         name: sshd
         state: started

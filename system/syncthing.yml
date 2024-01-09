@@ -1,21 +1,18 @@
 - hosts: localhost
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install syncthing
-      become: true
       apt:
         pkg:
           - syncthing
-        state: latest
-        update_cache: true
       tags:
         - deb
 
     - name: Install syncthing
-      become: true
       community.general.pacman:
         name:
           - syncthing
-        state: present
       tags:
         - arch
 
@@ -27,7 +24,6 @@
         - arch
     
     - name: Enable syncthing autostart on login
-      become: true
       systemd:
         name: syncthing@{{ current_user }}
         state: started

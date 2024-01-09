@@ -1,7 +1,8 @@
 - hosts: localhost
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install libvirt
-      become: true
       apt:
         pkg:
            - libvirtd
@@ -9,19 +10,15 @@
            - virt-manager
            - qemu-img
            - qemu-utils
-        state: latest
-        update_cache: true
       tags:
         - deb
 
     - name: Install libvirt
-      become: true
       community.general.pacman:
         name:
           - libvirt
           - qemu-full
           - virt-manager
-        state: present
       tags:
         - arch
     

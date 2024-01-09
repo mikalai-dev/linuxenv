@@ -1,6 +1,6 @@
 - hosts: localhost
-  become_user: root
-
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Download VeraCrypt Debian package
       get_url:
@@ -10,10 +10,8 @@
         - deb
 
     - name: Install VeraCrypt using dpkg
-      become: true
       apt:
         deb: "/tmp/veracrypt-1.26.7-Debian-12-amd64.deb"
-        state: present
       tags:
         - deb
 
@@ -27,10 +25,8 @@
         - deb
 
     - name: Install VeraCrypt
-      become: true
       community.general.pacman:
         name:
           - veracrypt
-        state: present
       tags:
         - arch

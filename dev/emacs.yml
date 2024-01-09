@@ -1,8 +1,8 @@
 - hosts: localhost
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
       - name: Install dependencies
-        become: true
         apt:
           pkg:
              - autoconf
@@ -24,8 +24,6 @@
              - libmagickcore-dev
              - libmagick++-dev
              - libtree-sitter-dev
-          state: latest
-          update_cache: true
         tags:
           - deb
 
@@ -75,12 +73,10 @@
         shell:
           cmd: make install
           chdir: "{{ ansible_env.HOME }}/repo/emacs"
-        become: true
         tags:
           - deb
 
       - name: Install emacs from repo
-        become: true
         community.general.pacman:
           name: emacs
           state: present

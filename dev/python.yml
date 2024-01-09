@@ -1,52 +1,42 @@
 - hosts: localhost
-  become_user: root
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install Python 3.11
-      become: yes
-      become_user: root
       apt:
         pkg: 
           - python3.11
           - python3-pip
           - ipython3
-        state: latest
-        update_cache: true
       tags:
         - deb
         - python
         - pip
 
     - name: Upgrade pip for Python 3.11
-      become: true
-      become_user: root
       command: python3.11 -m pip install --upgrade pip
       tags:
         - deb
         - upgrade-pip
 
     - name: Install Python
-      become: true
       community.general.pacman:
         name:
           - python3
           - python-pip
           - ipython
-        state: present
       tags:
         - arch
 
     - name: Install python-lsp-server[all] for PLS support in Emacs
-      become: true
       command: python3 -m pip install python-lsp-server[all]
       tags:
         - deb
         - python-lsp-server
 
     - name: Install python-lsp-server
-      become: true
       community.general.pacman:
         name:
           - python-lsp-server
-        state: present
       tags:
         - arch

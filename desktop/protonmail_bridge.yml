@@ -1,4 +1,6 @@
 - hosts: localhost
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   become_user: root
   tasks:
     - name: Download Proton Mail Bridge for debian
@@ -9,7 +11,6 @@
         - deb
 
     - name: Install the downloaded package
-      become: true
       apt:
         deb: /tmp/protonmail-bridge.deb
       tags:
@@ -24,7 +25,6 @@
         - arch
 
     - name: Install rpm2extract package
-      become: true
       pacman:
         name: rpmextract
         state: present
@@ -39,7 +39,6 @@
         - arch
 
     - name: Copy bin directory
-      become: true
       copy:
         src: /tmp/usr/bin
         dest: /usr/bin

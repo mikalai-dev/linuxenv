@@ -1,13 +1,12 @@
 - hosts: localhost
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install viking
-      become: true
       apt:
         pkg:
           - viking
           - josm
-        state: latest
-        update_cache: true
       tags:
         - deb
 
@@ -15,7 +14,6 @@
       community.general.pacman:
         name: viking
         state: present
-      become: true
       tags:
         - arch
 
@@ -24,13 +22,11 @@
         name:
           - josm
           - jdk-openjdk
-      become: true
       tags:
         - arch
 
     - name: Backup for the default josm start script
       command: mv /usr/bin/josm /usr/bin/josm-backup 
-      become: true
       tags:
         - arch
 
@@ -39,7 +35,6 @@
         path: /usr/bin/josm
         state: touch
         mode: 0755
-      become: true
       tags:
         - arch
 
@@ -49,6 +44,5 @@
         line: |
           #!/bin/bash
           java -jar /usr/share/java/josm/josm.jar
-      become: true
       tags:
         - arch

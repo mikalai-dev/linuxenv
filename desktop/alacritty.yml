@@ -1,7 +1,8 @@
 - hosts: localhost
+  roles:
+    - role: "../roles/linuxenv/tasks/main.yml"
   tasks:
     - name: Install dependencies
-      become: true
       apt:
         name:
           - cmake
@@ -31,7 +32,6 @@
       community.general.pacman:
         name: alacritty
         state: present
-      become: true
       tags:
         - arch
 
