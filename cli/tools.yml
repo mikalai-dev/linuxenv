@@ -18,6 +18,7 @@
            - wireguard-tools
            - make
            - cmake
+           - stlink-tools
       tags:
         - deb
 
@@ -37,6 +38,7 @@
           - wireguard-tools
           - make
           - cmake
+          - stlink
       tags:
         - arch
 
