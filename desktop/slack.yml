@@ -14,59 +14,53 @@
       tags:
         - deb
 
-    - name: Download Slack rpm package
-      get_url:
-        url: https://downloads.slack-edge.com/releases/linux/4.35.131/prod/x64/slack-4.35.131-0.1.el8.x86_64.rpm
-        dest: /tmp/slack.x86_64.rpm
-      tags:
-        - rpm
-        - arch
-
-    - name: Install rpm2extract package
+    - name: Install prerequisites for arch
       pacman:
-        name: rpmextract
-        state: present
+        name:
+          - git
+          - base-devel
+        update_cache: true
       tags:
         - arch
 
-    - name: Extract the downloaded rpm package
-      shell: rpmextract.sh slack.x86_64.rpm
+    - name: Clone the AUR repository
+      git:
+        repo: https://aur.archlinux.org/slack-desktop.git
+        dest: /tmp/slack-desktop
+      tags:
+        - arch
+
+    - name: Build and install Slack package
+      command: makepkg -sri
       args:
-        chdir: /tmp
+        chdir: ~/slack-desktop
+      register: makepkg_result
       tags:
         - arch
 
-    - name: Copy lib directory
-      copy:
-        src: /tmp/usr/lib/slack
-        dest: /usr/lib/
+    - name: Confirm package installation
+      pause:
+        prompt: "Proceed with installing Slack package? (Y/n)"
+      when: "'y' not in makepkg_result.stdout"
       tags:
         - arch
 
-    - name: Set permissions for the directory
-      file:
-        path: /usr/lib/slack
-        state: directory
-        recurse: yes
-        mode: "0755"
+    - name: Install Slack using yay
+      command: yay -S slack-desktop
+      register: yay_result
       tags:
         - arch
 
-    - name: Create symlink
-      file:
-        src: /usr/lib/slack/slack
-        dest: /usr/bin/slack
-        state: link
-        force: yes
+    - name: Confirm Slack installation
+      pause:
+        prompt: "Proceed with installing Slack using yay? (Y/n)"
+      when: "'y' not in yay_result.stdout"
       tags:
         - arch
 
     - name: Cleanup
       file:
+        path: "/tmp/slack-desktop"
         state: absent
-        path: "{{ item }}"
-      with_items:
-        - "/tmp/slack.x86_64.rpm"
-        - "/tmp/usr"
-        - "/tmp/etc/"
-
+      tags:
+        - arch
