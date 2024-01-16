@@ -26,10 +26,12 @@ git clone --recursive https://github.com/mikalai-dev/linuxenv.git && cd linuxenv
 - Docker
 - Docker-compose
 - Emacs
+- Feh
 - GIMP
 - Golang 1.21.3
 - Htop
 - I3 wm
+- Josm
 - Keepassxc
 - Mc
 - Neomutt
@@ -38,8 +40,11 @@ git clone --recursive https://github.com/mikalai-dev/linuxenv.git && cd linuxenv
 - Openssh
 - Python 3.11
 - ProtonVPN CLI
+- Proton Mail Bridge
 - Qemu
+- QFlipper
 - Signal Messenger
+- Slack
 - Spotify client
 - Syncthing
 - Telegram
