@@ -1,0 +1,72 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Download Slack for debian
+      get_url:
+        url: https://downloads.slack-edge.com/releases/linux/4.35.131/prod/x64/slack-desktop-4.35.131-amd64.deb
+        dest: /tmp/slack.deb
+      tags:
+        - deb
+
+    - name: Install the downloaded package
+      apt:
+        deb: /tmp/slack.deb
+      tags:
+        - deb
+
+    - name: Download Slack rpm package
+      get_url:
+        url: https://downloads.slack-edge.com/releases/linux/4.35.131/prod/x64/slack-4.35.131-0.1.el8.x86_64.rpm
+        dest: /tmp/slack.x86_64.rpm
+      tags:
+        - rpm
+        - arch
+
+    - name: Install rpm2extract package
+      pacman:
+        name: rpmextract
+        state: present
+      tags:
+        - arch
+
+    - name: Extract the downloaded rpm package
+      shell: rpmextract.sh slack.x86_64.rpm
+      args:
+        chdir: /tmp
+      tags:
+        - arch
+
+    - name: Copy lib directory
+      copy:
+        src: /tmp/usr/lib/slack
+        dest: /usr/lib/
+      tags:
+        - arch
+
+    - name: Set permissions for the directory
+      file:
+        path: /usr/lib/slack
+        state: directory
+        recurse: yes
+        mode: "0755"
+      tags:
+        - arch
+
+    - name: Create symlink
+      file:
+        src: /usr/lib/slack/slack
+        dest: /usr/bin/slack
+        state: link
+        force: yes
+      tags:
+        - arch
+
+    - name: Cleanup
+      file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - "/tmp/slack.x86_64.rpm"
+        - "/tmp/usr"
+        - "/tmp/etc/"
+
