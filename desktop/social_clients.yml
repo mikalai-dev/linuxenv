@@ -1,0 +1,30 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Create destination directory
+      file:
+        path: /usr/share/whalebird
+        state: directory
+      tags:
+        - arch
+        - deb
+
+    - name: Copy AppImage to /usr/share/whalebird
+      get_url:
+        url: https://github.com/h3poteto/whalebird-desktop/releases/download/v5.1.1/Whalebird-5.1.1-linux-x86_64.AppImage
+        dest: /usr/share/whalebird
+        mode: 0755
+      register: download_appimg
+      tags:
+        - arch
+        - deb
+
+    - name: Create a symlink to /usr/bin
+      file:
+         src: /usr/share/whalebird/Whalebird-5.1.1-linux-x86_64.AppImage
+         dest: /usr/bin/whalebird
+         state: link
+      when: download_appimg.changed
+      tags:
+         - arch
+         - deb
