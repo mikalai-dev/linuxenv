@@ -6,6 +6,9 @@
         pkg:
           - feh
           - geeqie
+          - gimp
+          - imagemagick
+
         state: latest
         update_cache: true
       tags:
@@ -14,7 +17,10 @@
     - name: Install graphics tools
       community.general.pacman:
         name:
+          - feh
+          - geeqie
           - gimp
+          - imagemagick
         state: latest
         update_cache: true
       tags:
