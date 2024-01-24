@@ -18,6 +18,7 @@
            - make
            - cmake
            - stlink-tools
+           - coreutils
         state: latest
         update_cache: true
       tags:
@@ -40,6 +41,7 @@
           - make
           - cmake
           - stlink
+          - coreutils
         state: latest
         update_cache: true
         upgrade: true
