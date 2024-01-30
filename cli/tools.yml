@@ -19,6 +19,7 @@
            - cmake
            - stlink-tools
            - coreutils
+           - bind9-dnsutils
         state: latest
         update_cache: true
       tags:
@@ -42,6 +43,7 @@
           - cmake
           - stlink
           - coreutils
+          - dnstuls
         state: latest
         update_cache: true
         upgrade: true
