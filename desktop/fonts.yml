@@ -9,6 +9,15 @@
         - deb
         - arch
 
+    - name: Install Fira Code font
+      community.general.pacman:
+        name:
+          - ttf-firacode-nerd
+        state: latest
+        update_cache: true
+      tags:
+         - arch 
+    
     - name: Download Source Code Pro font archive
       get_url:
         url: "https://github.com/adobe-fonts/source-code-pro/releases/download/2.042R-u%2F1.062R-i%2F1.026R-vf/TTF-source-code-pro-2.042R-u_1.062R-i.zip"
