@@ -1,0 +1,12 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Enable the Arch User Repository (AUR)
+      command: sed -Ei '/EnableAUR/s/^#//' /etc/pamac.conf
+      tags:
+        - arch
+
+    - name: Install the LibreWolf browser
+      command: pamac install librewolf-bin
+      tags:
+        - arch
