@@ -17,6 +17,7 @@ deb_env:
 	ansible-playbook desktop/fonts.yml -i local --tags=deb -vv
 	ansible-playbook desktop/slack.yml -i local --tags=deb -vv
 	ansible-playbook desktop/social_clients.yml -i local --tags=deb -vv
+	ansible-playbook desktop/element.yml -i local --tags=deb --vv
 	ansible-playbook dev/python.yml -i local -vv --tags=deb
 	ansible-playbook dev/qemu.yml -i local -vv --tags=deb
 	ansible-playbook dev/golang.yml -i local -vv --tags=deb
@@ -49,8 +50,9 @@ arch_env:
 	ansible-playbook desktop/gqrx.yml -i local --tags=arch -vv
 	ansible-playbook desktop/fonts.yml -i local --tags=arch -vv
 	ansible-playbook desktop/slack.yml -i local --tags=arch -vv
-	ansible-playbook desktop/social_clientsq.yml -i local --tags=arch -vv
+	ansible-playbook desktop/social_clients.yml -i local --tags=arch -vv
 	ansible-playbook desktop/protonmail_bridge.yml -i local --tags=arch -vv
+	ansible-playbook desktop/element.yml -i local --tags=arch -vv
 	ansible-playbook dev/python.yml -i local --tags=arch -vv
 	ansible-playbook dev/qemu.yml -i local --tags=arch -vv
 	ansible-playbook dev/golang.yml -i local --tags=arch -vv

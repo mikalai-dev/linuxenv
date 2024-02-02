@@ -1,0 +1,35 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Check if keyring file already exists
+      ansible.builtin.stat:
+        path: /usr/share/keyrings/element-io-archive-keyring.gpg
+      register: keyring_file
+      tags:
+        - deb
+        
+    - name: Get keyring file
+      ansible.builtin.get_url:
+        url: https://packages.element.io/debian/element-io-archive-keyring.gpg
+        dest: /usr/share/keyrings/element-io-archive-keyring.gpg
+        mode: "0644"
+      when: not keyring_file.stat.exists
+      tags:
+        - deb
+    - name: Add Element-desktop repository to the list of repositories
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/element-io.list
+        content: |
+          deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main
+        mode: "0644"
+      tags:
+        - deb
+
+    - name: Install Element-desktop
+      ansible.builtin.apt:
+        name: element-desktop
+        state: latest
+        update_cache: true
+      tags:
+        - deb
+        
