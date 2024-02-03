@@ -1,7 +1,5 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
-  become_user: root
+  become: true
   tasks:
     - name: Download Proton Mail Bridge for debian
       get_url:
@@ -16,31 +14,33 @@
       tags:
         - deb
 
-    - name: Download Proton Mail Bridge rpm package
+    - name: Make directory for building package
+      become_user: "{{ lookup('env', 'USER') }}"
+      file:
+        path: /tmp/bridge
+        state: directory
+      tags:
+        - arch
+
+    - name: Download PKGBUILD
+      become_user: "{{ lookup('env', 'USER') }}"
       get_url:
-        url: https://proton.me/download/bridge/protonmail-bridge-3.7.1-1.x86_64.rpm
-        dest: /tmp/protonmail-bridge.x86_64.rpm
-      tags:
-        - rpm
-        - arch
-
-    - name: Install rpm2extract package
-      pacman:
-        name: rpmextract
-        state: present
+        url: https://proton.me/download/bridge/PKGBUILD
+        dest: /tmp/bridge/PKGBUILD
       tags:
         - arch
 
-    - name: Extract the downloaded rpm package
-      shell: rpmextract.sh protonmail-bridge.x86_64.rpm
+    - name: Build and install Proton Mail Bridge package
+      become_user: "{{ lookup('env', 'USER') }}"
+      command: makepkg -sri --noconfirm
       args:
-        chdir: /tmp
+        chdir: /tmp/bridge
       tags:
         - arch
 
-    - name: Copy bin directory
-      copy:
-        src: /tmp/usr/bin
-        dest: /usr/bin
+    - name: Cleanup
+      file:
+        path: /tmp/bridge
+        state: absent
       tags:
         - arch
