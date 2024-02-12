@@ -1,0 +1,18 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Install podman for debian
+      apt:
+        name: podman
+        state: latest
+        update_cache: true
+      tags:
+        - deb
+
+    - name: Install podman for arch/manjaro
+      pacman:
+        name: podman
+        state: latest
+        update_cache: true
+      tags:
+        - arch

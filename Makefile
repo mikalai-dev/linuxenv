@@ -1,7 +1,7 @@
 deb_env:
 	ansible-playbook browser/brave.yml -i local --tags=deb -vv
 	ansible-playbook browser/vivaldi.yml -i local --tags=deb -vv
-	ansible-playbook docker/docker.yml -i local --tags=deb -vv
+	ansible-playbook containers/docker.yml -i local --tags=deb -vv
 	ansible-playbook desktop/i3.yml -i local --tags=deb -vv
 	ansible-playbook desktop/telegram.yml -i local --tags=deb -vv
 	ansible-playbook desktop/obsidian.yml -i local --tags=deb -vv
@@ -35,7 +35,7 @@ arch_env:
 	ansible-playbook browser/brave.yml -i local --tags=arch -vv
 	ansible-playbook browser/vivaldi.yml -i local --tags=arch -vv
 	ansible-playbook browser/librewolf.yml -i local --tags=arch -vv
-	ansible-playbook docker/docker.yml -i local --tags=arch -vv
+	ansible-playbook containers/docker.yml -i local --tags=arch -vv
 	ansible-playbook desktop/i3.yml -i local --tags=arch -vv
 	ansible-playbook desktop/telegram.yml -i local --tags=arch -vv
 	ansible-playbook desktop/obsidian.yml -i local --tags=arch -vv
