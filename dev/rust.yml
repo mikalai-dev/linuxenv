@@ -1,0 +1,18 @@
+- hosts: localhost
+  tasks:
+    - name: Install Rust from the rustup.rs
+      block:
+        - name: Download Rust installation script
+          get_url:
+            url: https://sh.rustup.rs
+            dest: /tmp/rustup.sh
+            mode: '0755'
+
+        - name: Install Rust
+          command: sh /tmp/rustup.sh -y
+          environment:
+            PATH: "{{ ansible_env.PATH }}:{{ ansible_env.HOME}}/.cargo/bin"
+      tags:
+        - deb
+        - arch
+        
