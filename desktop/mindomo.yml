@@ -30,7 +30,7 @@
     - name: Change mode to executable
       file:
         path: /usr/bin/mindomo
-        mode: 'u+x'
+        mode: 'a+x'
       tags:
         - arch
         - deb
