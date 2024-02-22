@@ -32,4 +32,11 @@
         update_cache: true
       tags:
         - deb
-        
+
+    - name: Install Element-desktop on Arch
+      pacman:
+        name: element-desktop
+        state: latest
+        update_cache: true
+      tags:
+        - arch
