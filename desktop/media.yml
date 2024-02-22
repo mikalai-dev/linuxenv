@@ -67,3 +67,31 @@
       tags:
         - arch
 
+    - name: Install Museeks audioplayer
+      block:
+        - name: Create the destination directory
+          file:
+            path: /opt/museeks
+            state: directory
+            
+        - name: Download AppImage
+          get_url:
+            url: https://github.com/martpie/museeks/releases/download/0.13.1/museeks-x86_64.AppImage
+            dest: /opt/museeks/museeks-x86_64.AppImage
+            mode: '0755'
+
+        - name: Link to the /usr/bin
+          file:
+            src: /opt/museeks/museeks-x86_64.AppImage
+            dest: /usr/bin/museeks
+            state: link
+            force: yes
+
+        - name: Chnage mode to executable
+          file:
+            path: /usr/bi//museeks
+            mode: 'a+x'
+    tags:
+      - arch
+      - deb
+
