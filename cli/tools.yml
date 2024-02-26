@@ -20,6 +20,7 @@
            - stlink-tools
            - coreutils
            - bind9-dnsutils
+           - cosign
         state: latest
         update_cache: true
       tags:
@@ -44,6 +45,7 @@
           - stlink
           - coreutils
           - dnstuls
+          - cosign
         state: latest
         update_cache: true
         upgrade: true
