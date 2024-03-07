@@ -1,0 +1,19 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Install the rkhunter
+      apt:
+        pkg:
+          - rkhunter
+        state: latest
+        update_cache: true
+      tags:
+        - deb
+
+    - name: Install the rkhunter
+      pacman:
+        name: rkhunter
+        state: latest
+        update_cache: true
+      tags:
+        - arch
