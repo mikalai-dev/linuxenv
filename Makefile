@@ -24,7 +24,8 @@ deb_env:
 	ansible-playbook dev/golang.yml -i local -vv --tags=deb
 	ansible-playbook dev/arduino.yml -i local -vv --tags=deb
 	ansible-playbook dev/emacs.yml -i local -vv --tags=deb
-	ansible-playbook dev/rust.ynl -i local -vv --tags=deb
+	ansible-playbook dev/rust.yml -i local -vv --tags=deb
+	ansible-playbook dev/ruby.yml -i local -vv --tags=deb
 	ansible-playbook cli/tools.yml -i local -vv --tags=deb
 	ansible-playbook graphics/gimp.yml -i local --tags=deb -vv
 	ansible-playbook graphics/darktable.yml -i local --tags=deb -vv
@@ -63,6 +64,7 @@ arch_env:
 	ansible-playbook dev/arduino.yml -i local --tags=arch -vv
 	ansible-playbook dev/emacs.yml -i local --tags=arch -vv
 	ansible-playbook dev/rust.yml -i local --tags=arch -vv
+	ansible-playbook dev/ruby.yml -i local --tags=arch -vv
 	ansible-playbook cli/tools.yml -i local --tags=arch -vv
 	ansible-playbook graphics/gimp.yml -i local --tags=arch -vv
 	ansible-playbook graphics/darktable.yml -i local --tags=arch -vv

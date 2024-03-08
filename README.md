@@ -45,6 +45,7 @@ git clone --recursive https://github.com/mikalai-dev/linuxenv.git && cd linuxenv
 - Qemu
 - QFlipper
 - Rkhunter
+- RVM
 - Signal Messenger
 - Slack
 - Spotify client
