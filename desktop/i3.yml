@@ -14,7 +14,7 @@
         - deb
 
     - name: Install i3 window manager
-      community.general.pacman:
+      pacman:
         name:
           - i3-wm
           - i3blocks

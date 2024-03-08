@@ -15,7 +15,7 @@
         - deb
 
     - name: Install graphics tools
-      community.general.pacman:
+      pacman:
         name:
           - feh
           - geeqie

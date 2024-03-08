@@ -11,7 +11,7 @@
         - deb
 
     - name: Install cups
-      community.general.pacman:
+      pacman:
         name:
           - cups
         state: latest

@@ -21,7 +21,7 @@
         - upgrade-pip
 
     - name: Install Python
-      community.general.pacman:
+      pacman:
         name:
           - python3
           - python-pip
@@ -38,7 +38,7 @@
         - python-lsp-server
 
     - name: Install python-lsp-server
-      community.general.pacman:
+      pacman:
         name:
           - python-lsp-server
         state: latest

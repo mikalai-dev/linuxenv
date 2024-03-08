@@ -41,7 +41,7 @@
         - deb
 
     - name: Install obsidian from the repository
-      community.general.pacman:
+      pacman:
         name: obsidian
         state: latest
         update_cache: true

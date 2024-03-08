@@ -30,7 +30,7 @@
         - deb
 
     - name: Install alacritty
-      community.general.pacman:
+      pacman:
         name: alacritty
         state: latest
         update_cache: true

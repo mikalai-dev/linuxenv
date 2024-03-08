@@ -16,7 +16,7 @@
         - deb
 
     - name: Install libvirt
-      community.general.pacman:
+      pacman:
         name:
           - libvirt
           - qemu-full

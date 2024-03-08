@@ -21,7 +21,7 @@
         - deb
 
     - name: Install Go from the repository
-      community.general.pacman:
+      pacman:
         name: go
         state: latest
         update_cache: true

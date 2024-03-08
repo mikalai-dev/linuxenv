@@ -34,7 +34,7 @@
         - deb
 
     - name: Install vivaldi browser
-      community.general.pacman:
+      pacman:
         name: vivaldi
         state: present
       tags:

@@ -71,7 +71,7 @@
         - deb
 
     - name: Install docker
-      community.general.pacman:
+      pacman:
         name: docker
         state: latest
         update_cache: true
@@ -79,7 +79,7 @@
         - arch
 
     - name: Install docker-compose
-      community.general.pacman:
+      pacman:
         name: docker-compose
         state: latest
         update_cache: true

@@ -11,7 +11,7 @@
         - deb
 
     - name: Install GIMP
-      community.general.pacman:
+      pacman:
         name:
           - gimp
         state: latest

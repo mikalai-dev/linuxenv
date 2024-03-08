@@ -25,7 +25,7 @@
         - deb
 
     - name: Install VeraCrypt
-      community.general.pacman:
+      pacman:
         name:
           - veracrypt
         state: latest

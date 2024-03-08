@@ -12,7 +12,7 @@
         - deb
 
     - name: Install torbrowser
-      community.general.pacman:
+      pacman:
         name: torbrowser-launcher
         state: latest
         update_cache: true

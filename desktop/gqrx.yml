@@ -12,7 +12,7 @@
          - deb
 
      - name: Install gqrx
-       community.general.pacman:
+       pacman:
          name:
            - gqrx
          state: latest

@@ -24,7 +24,7 @@
         - deb
 
     - name: Install Signal Messenger
-      community.general.pacman:
+      pacman:
         name: signal-desktop
         state: latest
         update_cache: true

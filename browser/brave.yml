@@ -35,7 +35,7 @@
         - deb
 
     - name: Install Brave
-      community.general.pacman:
+      pacman:
         name: brave-browser
         state: present
       tags:

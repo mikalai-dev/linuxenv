@@ -78,7 +78,7 @@
           - deb
 
       - name: Install emacs from repo
-        community.general.pacman:
+        pacman:
           name: emacs
           state: latest
           update_cache: true

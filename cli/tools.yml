@@ -27,7 +27,7 @@
         - deb
 
     - name: Install CLI tools
-      community.general.pacman:
+      pacman:
         name:
           - mc
           - htop

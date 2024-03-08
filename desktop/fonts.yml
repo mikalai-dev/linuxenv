@@ -10,7 +10,7 @@
         - arch
 
     - name: Install Fira Code font
-      community.general.pacman:
+      pacman:
         name:
           - ttf-firacode-nerd
         state: latest
