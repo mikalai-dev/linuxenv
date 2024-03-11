@@ -39,9 +39,10 @@ git clone --recursive https://github.com/mikalai-dev/linuxenv.git && cd linuxenv
 - NordVPN CLI
 - Obsidian
 - Openssh
-- Python 3.11
+- Postman
 - ProtonVPN CLI
 - Proton Mail Bridge
+- Python 3.11
 - Qemu
 - QFlipper
 - Rkhunter

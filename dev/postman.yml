@@ -1,0 +1,58 @@
+- hosts: localhost
+  tasks:
+    - name: Download postman
+      uri:
+        url: https://dl.pstmn.io/download/latest/linux_64
+        dest: /tmp/postman-linux-x64.tar.gz
+      register: downloaded_arch
+      tags:
+        - arch
+        - deb
+
+    - name: Extract archive
+      unarchive:
+        src: /tmp/postman-linux-x64.tar.gz
+        dest: /tmp
+        remote_src: yes
+      when: downloaded_arch.changed
+      tags:
+        - arch
+        - deb
+
+    - name: Copy postman to /opt
+      become: yes
+      command: mv /tmp/Postman /opt/postman
+      tags:
+        - arch
+        - deb
+
+    - name: Link the binary to /usr/bin
+      become: yes
+      file:
+        src: /opt/postman/Postman
+        dest: /usr/bin/postman
+        state: link
+      tags:
+        - arch
+        - deb
+
+    - name: Change mode to executable
+      become: yes
+      file:
+        path: /opt/postman/Postman
+        mode: 'u+x'
+      tags:
+        - arch
+        - deb
+
+    - name: Cleanup
+      file:
+        path: '{{ item }}'
+        state: absent
+        with_items:
+          - '/tmp/postman-linux-x64.tar.gz'
+          - '/tmp/Postman'
+      tags:
+        - arch
+        - deb
+    
