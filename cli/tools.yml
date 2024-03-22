@@ -46,6 +46,7 @@
           - coreutils
           - dnstuls
           - cosign
+          - csvlens
         state: latest
         update_cache: true
         upgrade: true
