@@ -10,6 +10,7 @@
            - virt-manager
            - qemu-img
            - qemu-utils
+           - vagrant
         state: latest
         update_cache: true
       tags:
@@ -21,6 +22,7 @@
           - libvirt
           - qemu-full
           - virt-manager
+          - vagrant
         state: latest
         update_cache: true
       tags:
