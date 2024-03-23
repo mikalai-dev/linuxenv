@@ -35,6 +35,7 @@ git clone --recursive https://github.com/mikalai-dev/linuxenv.git && cd linuxenv
 - Keepassxc
 - Mc
 - Mindomo
+- Minikube
 - Neomutt
 - NordVPN CLI
 - Obsidian

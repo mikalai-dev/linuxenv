@@ -1,0 +1,27 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Download installation binary
+      uri:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /tmp/minikube-linux-amd64
+      register: downloaded_binary
+      tags:
+        - arch
+        - deb
+    - name: Running installation
+      args:
+        chdir: /tmp
+      command: install minikube-linux-amd64 /usr/local/bin/minikube
+      when: downloaded_binary.changed
+      tags:
+        - arch
+        - deb
+
+    - name: Cleanup
+      file:
+        path: "/tmp/minikube-linux-amd64"
+        state: absent
+      tags:
+        - arch
+        - deb
