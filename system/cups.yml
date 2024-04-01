@@ -5,6 +5,7 @@
       apt:
         pkg:
           - cups
+          - hplip
         state: latest
         update_cache: true
       tags:
@@ -14,6 +15,7 @@
       pacman:
         name:
           - cups
+          - hplip
         state: latest
         update_cache: true
       tags:
