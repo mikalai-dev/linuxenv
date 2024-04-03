@@ -54,6 +54,7 @@ git clone --recursive https://github.com/mikalai-dev/linuxenv.git && cd linuxenv
 - Syncthing
 - Telegram
 - Thunderbird
+- Tmux
 - Torbrowser
 - Vagrant
 - Veracrypt 1.26.7
