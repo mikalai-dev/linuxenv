@@ -48,7 +48,7 @@
           - dnstuls
           - cosign
           - csvlens
-          - tmux
+          - zellij
         state: latest
         update_cache: true
         upgrade: true
@@ -71,7 +71,7 @@
       tags:
         - arch
         - deb
- 
+
     - name: Copy mutt config
       synchronize:
         src: ../configs/dotfiles/.mutt
@@ -79,4 +79,3 @@
       tags:
         - arch
         - deb
-       
