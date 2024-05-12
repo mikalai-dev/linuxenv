@@ -20,7 +20,7 @@
 
     - name: Copy IDE to /opt/arduino
       get_url:
-        url: https://downloads.arduino.cc/arduino-ide/arduino-ide_2.2.1_Linux_64bit.AppImage
+        url: https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.2_Linux_64bit.AppImage
         dest: /opt/arduino/arduino-ide
         mode: 0755
       register: download_appimg
