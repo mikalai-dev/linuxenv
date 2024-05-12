@@ -22,6 +22,7 @@
            - bind9-dnsutils
            - cosign
            - tmux
+           - pdftk
         state: latest
         update_cache: true
       tags:
@@ -49,6 +50,7 @@
           - cosign
           - csvlens
           - zellij
+          - pdftk
         state: latest
         update_cache: true
         upgrade: true
