@@ -5,6 +5,7 @@ deb_env:
 	ansible-playbook desktop/i3.yml -i local --tags=deb -vv
 	ansible-playbook desktop/telegram.yml -i local --tags=deb -vv
 	ansible-playbook desktop/obsidian.yml -i local --tags=deb -vv
+	ansible-playbook desktop/joplin.yml -i local --tags=dev -vv
 	ansible-playbook desktop/keepassxc.yml -i local -vv --tags=deb
 	ansible-playbook desktop/alacritty.yml -i local -vv --tags=deb
 	ansible-playbook desktop/thunderbird.yml -i local -vv --tags=deb
@@ -44,6 +45,7 @@ arch_env:
 	ansible-playbook desktop/i3.yml -i local --tags=arch -vv
 	ansible-playbook desktop/telegram.yml -i local --tags=arch -vv
 	ansible-playbook desktop/obsidian.yml -i local --tags=arch -vv
+	ansible-playbook desktop/joplin.yml -i local --tags=arch -vv
 	ansible-playbook desktop/keepassxc.yml -i local --tags=arch -vv
 	ansible-playbook desktop/alacritty.yml -i local --tags=arch -vv
 	ansible-playbook desktop/thunderbird.yml -i local --tags=arch -vv

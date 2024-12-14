@@ -1,0 +1,67 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Ensure required packages are installed
+      package:
+        name: "{{ item }}"
+        state: latest
+        update_cache: true
+      loop:
+        - curl
+      tags:
+        - arch
+        - deb
+
+    - name: Fetch latest nightly release version
+      uri:
+        url: https://api.github.com/repos/laurent22/joplin/releases/tags/v3.2.4
+        return_content: yes
+      register: nightly_release
+      tags:
+        - arch
+        - deb
+
+    - name: Get download URL for Joplin release
+      set_fact:
+         download_url: "{{ nightly_release.json.assets | selectattr('name', 'match', '^Joplin.*AppImage$') | map(attribute='browser_download_url') | first }}"
+      tags:
+        - arch
+        - deb
+
+    - name: Print download URL
+      debug:
+          var: download_url
+      tags:
+        - arch
+        - deb
+
+    - name: Create destination directory /opt/joplin
+      become: yes
+      file:
+         path: "/opt/joplin"
+         state: directory
+      tags:
+        - arch
+        - deb
+    
+    - name: Download Joplin AppImage
+      become: yes
+      get_url:
+        url: "{{ download_url }}"
+        dest: "/opt/joplin/Joplin.AppImage"
+        mode: 0755
+      register: download_appimage
+      tags:
+        - arch
+        - deb
+
+    - name: Create a symlink to /usr/bin
+      become: yes
+      file:
+        src: "/opt/joplin/Joplin.AppImage"
+        dest: "/usr/bin/joplin"
+        state: link
+      when: download_appimage.changed
+      tags:
+        - arch
+        - deb
