@@ -51,8 +51,3 @@
       tags:
         - arch
 
-    - name: Install organic maps
-      command: yay -S organicmaps-git --noconfirm
-      tags:
-        - arch
-

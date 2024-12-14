@@ -1,6 +1,5 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Install libvirt
       apt:
@@ -29,5 +28,7 @@
         - arch
     
     - name: Start libvirt
-      service: libvirtd
-      status: started
+      ansible.builtin.service: 
+        name: libvirtd
+        state: started
+        enabled: yes

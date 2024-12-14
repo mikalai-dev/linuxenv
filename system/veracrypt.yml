@@ -1,6 +1,5 @@
 - hosts: localhost
-  roles:
-    - role: "../roles/linuxenv/tasks/main.yml"
+  become: true
   tasks:
     - name: Download VeraCrypt Debian package
       get_url:

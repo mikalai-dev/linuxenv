@@ -40,7 +40,6 @@ deb_env:
 arch_env:
 	ansible-playbook browser/brave.yml -i local --tags=arch -vv
 	ansible-playbook browser/vivaldi.yml -i local --tags=arch -vv
-	ansible-playbook browser/librewolf.yml -i local --tags=arch -vv
 	ansible-playbook containers/docker.yml -i local --tags=arch -vv
 	ansible-playbook desktop/i3.yml -i local --tags=arch -vv
 	ansible-playbook desktop/telegram.yml -i local --tags=arch -vv
@@ -55,7 +54,6 @@ arch_env:
 	ansible-playbook desktop/flipper.yml -i local --tags=arch -vv
 	ansible-playbook desktop/gqrx.yml -i local --tags=arch -vv
 	ansible-playbook desktop/fonts.yml -i local --tags=arch -vv
-	ansible-playbook desktop/slack.yml -i local --tags=arch -vv
 	ansible-playbook desktop/social_clients.yml -i local --tags=arch -vv
 	ansible-playbook desktop/protonmail_bridge.yml -i local --tags=arch -vv
 	ansible-playbook desktop/element.yml -i local --tags=arch -vv
@@ -65,7 +63,6 @@ arch_env:
 	ansible-playbook dev/golang.yml -i local --tags=arch -vv
 	ansible-playbook dev/arduino.yml -i local --tags=arch -vv
 	ansible-playbook dev/emacs.yml -i local --tags=arch -vv
-	ansible-playbook dev/postman.yml -i local --tags=arch -vv
 	ansible-playbook dev/rust.yml -i local --tags=arch -vv
 	ansible-playbook dev/ruby.yml -i local --tags=arch -vv
 	ansible-playbook dev/minikube.yml -i local --tags=arch -vv
