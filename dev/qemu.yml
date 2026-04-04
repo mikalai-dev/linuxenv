@@ -4,12 +4,14 @@
     - name: Install libvirt
       apt:
         pkg:
-           - libvirtd
+           - libvirt-daemon
+           - libvirt-daemon-system
+           - libvirt-clients
            - qemu-kvm
            - virt-manager
-           - qemu-img
            - qemu-utils
            - vagrant
+           - virtiofsd
         state: latest
         update_cache: true
       tags:

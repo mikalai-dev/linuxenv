@@ -27,10 +27,22 @@
         
     
     - name: Remove config directory
-      command: rm -rf ~/.config/i3
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config/i3"
+        state: absent
       tags:
         - arch
         - deb
+
+    - name: Ensure ~/.config exists
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config/i3"
+        state: directory
+        mode: '0755'
+      tags:
+        - arch
+        - deb
+
 
     - name: Copy i3 config
       synchronize:

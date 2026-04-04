@@ -1,18 +1,42 @@
 - hosts: localhost
   become: true
-  tasks:
+  vars:
+    rvm_key_1: "409B6B1796C275462A1703113804BB82D39DC0E3"
+    rvm_key_2: "7D2BAF1CF37B13E2069D6956105BD0E739499BDB"
+    rvm_installer: /tmp/rvm-installer.sh
 
-    - name: Import RVM GPG keys
-      shell: |
-        gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 \
-          7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+  tasks:
+    - name: Ensure gnupg is installed
+      package:
+        name: gnupg
+        state: present
       tags:
         - arch
         - deb
-          
-    - name: Install RVM
-      shell: |
-        curl -sSL https://get.rvm.io | bash -s stable
+
+    - name: Import RVM GPG keys
+      command: >
+        gpg --keyserver hkp://keyserver.ubuntu.com:80
+        --recv-keys {{ rvm_key_1 }} {{ rvm_key_2 }}
+      register: gpg_result
+      changed_when: "'imported' in gpg_result.stderr or 'not changed' not in gpg_result.stderr"
+      tags:
+        - arch
+        - deb
+
+    - name: Download RVM installer
+      get_url:
+        url: https://get.rvm.io
+        dest: "{{ rvm_installer }}"
+        mode: '0755'
+      tags:
+        - arch
+        - deb
+
+    - name: Install RVM (only if not installed)
+      command: "{{ rvm_installer }} stable"
+      args:
+        creates: /usr/local/rvm/bin/rvm
       tags:
         - arch
         - deb

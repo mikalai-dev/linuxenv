@@ -1,17 +1,26 @@
 - hosts: localhost
   become: true
   tasks:
-    - name: Add Signal APT repository key
-      apt_key:
+    - name: Ensure keyrings directory exists
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+      tags:
+        - deb
+
+    - name: Download Signal GPG key
+      get_url:
         url: https://updates.signal.org/desktop/apt/keys.asc
-      register: key_result
+        dest: /etc/apt/keyrings/signal.asc
+        mode: '0644'
       tags:
         - deb
 
     - name: Add Signal APT repository
       apt_repository:
-        repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
-      when: key_result.changed
+        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/signal.asc] https://updates.signal.org/desktop/apt xenial main"
+        state: present
       tags:
         - deb
 
@@ -30,4 +39,4 @@
         update_cache: true
       tags:
         - arch
-      
+

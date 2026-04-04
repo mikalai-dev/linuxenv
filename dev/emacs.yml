@@ -18,7 +18,7 @@
              - libjansson4
              - libjansson-dev
              - libgccjit0
-             - libgccjit-10-dev
+             - libgccjit-12-dev
              - gcc-12
              - libmagickcore-dev
              - libmagick++-dev

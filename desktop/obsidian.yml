@@ -14,7 +14,7 @@
       set_fact:
         deb_package_url: "{{ item.browser_download_url }}"
       loop: "{{ github_release.json.assets }}"
-      when: item.name | regex_search('.*\\.deb$')
+      when: item.name.endswith('.deb')
       tags:
         - deb
 

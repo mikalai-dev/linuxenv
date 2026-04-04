@@ -3,23 +3,21 @@
   tasks:
     - name: Download VeraCrypt Debian package
       get_url:
-        url: "https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Debian-12-amd64.deb"
-        dest: "/tmp/veracrypt-1.26.7-Debian-12-amd64.deb"
+        url: "https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.24/veracrypt-1.26.24-Debian-12-amd64.deb"
+        dest: "/tmp/veracrypt.deb"
       tags:
         - deb
 
     - name: Install VeraCrypt using dpkg
       apt:
-        deb: "/tmp/veracrypt-1.26.7-Debian-12-amd64.deb"
+        deb: "/tmp/veracrypt.deb"
       tags:
         - deb
 
     - name: Remove downloaded files
       file:
-        path: "/tmp/{{ item }}"
+        path: "/tmp/veracrypt.deb"
         state: absent
-      loop:
-        - "veracrypt-1.26.7-Debian-12-amd64.deb"
       tags:
         - deb
 

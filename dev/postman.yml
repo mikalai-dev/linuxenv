@@ -49,7 +49,7 @@
       file:
         path: '{{ item }}'
         state: absent
-        with_items:
+      loop:
           - '/tmp/postman-linux-x64.tar.gz'
           - '/tmp/Postman'
       tags:

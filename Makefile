@@ -5,7 +5,6 @@ deb_env:
 	ansible-playbook desktop/i3.yml -i local --tags=deb -vv
 	ansible-playbook desktop/telegram.yml -i local --tags=deb -vv
 	ansible-playbook desktop/obsidian.yml -i local --tags=deb -vv
-	ansible-playbook desktop/joplin.yml -i local --tags=dev -vv
 	ansible-playbook desktop/keepassxc.yml -i local -vv --tags=deb
 	ansible-playbook desktop/alacritty.yml -i local -vv --tags=deb
 	ansible-playbook desktop/thunderbird.yml -i local -vv --tags=deb
@@ -18,8 +17,6 @@ deb_env:
 	ansible-playbook desktop/fonts.yml -i local --tags=deb -vv
 	ansible-playbook desktop/slack.yml -i local --tags=deb -vv
 	ansible-playbook desktop/social_clients.yml -i local --tags=deb -vv
-	ansible-playbook desktop/element.yml -i local --tags=deb --vv
-	ansible-playbook desktop/mindomo.yml -i local --tags=deb --vv
 	ansible-playbook dev/python.yml -i local -vv --tags=deb
 	ansible-playbook dev/qemu.yml -i local -vv --tags=deb
 	ansible-playbook dev/golang.yml -i local -vv --tags=deb
@@ -28,7 +25,6 @@ deb_env:
 	ansible-playbook dev/postman.yml -i local -vv --tags=deb
 	ansible-playbook dev/rust.yml -i local -vv --tags=deb
 	ansible-playbook dev/ruby.yml -i local -vv --tags=deb
-	ansible-playbook dev/minikube.yml -i local -vv --tags=deb
 	ansible-playbook cli/tools.yml -i local -vv --tags=deb
 	ansible-playbook graphics/gimp.yml -i local --tags=deb -vv
 	ansible-playbook graphics/darktable.yml -i local --tags=deb -vv

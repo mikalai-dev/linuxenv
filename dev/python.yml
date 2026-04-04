@@ -1,24 +1,19 @@
 - hosts: localhost
   become: true
   tasks:
-    - name: Install Python 3.11
+    - name: Install Python 3.13
       apt:
         pkg: 
-          - python3.11
+          - python3.13
           - python3-pip
           - ipython3
+          - python3-pylsp
         state: latest
         update_cache: true
       tags:
         - deb
         - python
         - pip
-
-    - name: Upgrade pip for Python 3.11
-      command: python3.11 -m pip install --upgrade pip
-      tags:
-        - deb
-        - upgrade-pip
 
     - name: Install Python
       pacman:
@@ -30,12 +25,6 @@
         update_cache: true
       tags:
         - arch
-
-    - name: Install python-lsp-server[all] for PLS support in Emacs
-      command: python3 -m pip install python-lsp-server[all]
-      tags:
-        - deb
-        - python-lsp-server
 
     - name: Install python-lsp-server
       pacman:

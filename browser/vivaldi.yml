@@ -1,45 +1,42 @@
 - hosts: all
   become: true
   tasks:
-    - name: Add vivaldi repository key
-      apt_key:
-         url: https://repo.vivaldi.com/stable/linux_signing_key.pub
+    - name: Ensure keyrings directory exists
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
       tags:
         - deb
 
-    - name: Check if repository exists
-      stat:
-          path: /etc/apt/sources.list.d/vivaldi.list
-      register:
-          vivaldi_repo
+    - name: Download Vivaldi GPG key
+      get_url:
+        url: https://repo.vivaldi.com/stable/linux_signing_key.pub
+        dest: /etc/apt/keyrings/vivaldi.asc
+        mode: '0644'
       tags:
         - deb
 
-    - name: Add repository
+    - name: Add Vivaldi repository
       apt_repository:
-          repo: "deb https://repo.vivaldi.com/stable/deb/ stable main"
-          state: present
-          filename: vivaldi
-      when:
-        - vivaldi_repo.stat.exists == False
+        repo: "deb [signed-by=/etc/apt/keyrings/vivaldi.asc] https://repo.vivaldi.com/stable/deb/ stable main"
+        state: present
+        filename: vivaldi
       tags:
         - deb
 
-    - name: Install package
-      become: true
+    - name: Install Vivaldi
       apt:
         name: vivaldi-stable
         state: latest
+        update_cache: true
       tags:
         - deb
 
-    - name: Install vivaldi browser
+    - name: Install Vivaldi
       pacman:
         name: vivaldi
         state: present
+        update_cache: true
       tags:
         - arch
-
-
-
-    

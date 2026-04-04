@@ -3,29 +3,10 @@
   tasks:
     - name: Install dependencies
       apt:
-        name:
-          - cmake
-          - pkg-config
-          - libfreetype6-dev
-          - libfontconfig1-dev
-          - libxcb-xfixes0-dev
-          - python3
-          - libxcb-shape0-dev
-          - libxcb-xkb-dev
-          - libxkbcommon-x11-dev
-          - libxcb1-dev
-          - libxcb-keysyms1-dev
-          - libxrandr-dev
-          - libxi-dev
-          - cargo
+        pkg:
+          - alacritty
         state: latest
         update_cache: true
-      tags:
-        - deb
-
-
-    - name: Build and install Alacritty
-      command: cargo install alacritty
       tags:
         - deb
 
@@ -38,10 +19,10 @@
         - arch
 
     - name: Copy alacritty config
-      copy:
-         src: ../configs/dotfiles/alacritty.yml
-         dest: ~/.config
-      tags:
-        - arch
-        - deb
+     copy:
+        src: ../configs/dotfiles/alacritty.yml
+        dest: ~/.config
+     tags:
+       - arch
+       - deb
          
