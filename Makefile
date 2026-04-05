@@ -1,6 +1,7 @@
 deb_env:
 	ansible-playbook browser/brave.yml -i local --tags=deb -vv
 	ansible-playbook browser/vivaldi.yml -i local --tags=deb -vv
+	ansible-playbook desktop/torbrowser.yml -i local -vv --tags=deb
 	ansible-playbook containers/docker.yml -i local --tags=deb -vv
 	ansible-playbook desktop/i3.yml -i local --tags=deb -vv
 	ansible-playbook desktop/telegram.yml -i local --tags=deb -vv
@@ -8,7 +9,6 @@ deb_env:
 	ansible-playbook desktop/keepassxc.yml -i local -vv --tags=deb
 	ansible-playbook desktop/alacritty.yml -i local -vv --tags=deb
 	ansible-playbook desktop/thunderbird.yml -i local -vv --tags=deb
-	ansible-playbook desktop/torbrowser.yml -i local -vv --tags=deb
 	ansible-playbook desktop/signal.yml -i local -vv --tags=deb
 	ansible-playbook desktop/briar.yml -i local -vv --tags=deb
 	ansible-playbook desktop/gis.yml -i local -vv --tags=deb
@@ -37,6 +37,7 @@ deb_env:
 arch_env:
 	ansible-playbook browser/brave.yml -i local --tags=arch -vv
 	ansible-playbook browser/vivaldi.yml -i local --tags=arch -vv
+	ansible-playbook desktop/torbrowser.yml -i local --tags=arch -vv
 	ansible-playbook containers/docker.yml -i local --tags=arch -vv
 	ansible-playbook desktop/i3.yml -i local --tags=arch -vv
 	ansible-playbook desktop/telegram.yml -i local --tags=arch -vv
@@ -45,7 +46,6 @@ arch_env:
 	ansible-playbook desktop/keepassxc.yml -i local --tags=arch -vv
 	ansible-playbook desktop/alacritty.yml -i local --tags=arch -vv
 	ansible-playbook desktop/thunderbird.yml -i local --tags=arch -vv
-	ansible-playbook desktop/torbrowser.yml -i local --tags=arch -vv
 	ansible-playbook desktop/signal.yml -i local --tags=arch -vv
 	ansible-playbook desktop/briar.yml -i local --tags=arch -vv
 	ansible-playbook desktop/gis.yml -i local --tags=arch -vv
