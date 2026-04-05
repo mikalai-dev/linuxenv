@@ -8,7 +8,7 @@ if [ -e /etc/os-release ]; then
         debian|ubuntu|linuxmint)
             sudo apt-get -y update
             sudo apt-get -y upgrade
-            sudo apt-get install -y make ansible curl git
+            sudo apt-get install -y make ansible curl git gpg unzip
             sudo chown -R $USER ~/.ansible
             echo "Install the deb linux environment"
             make deb_env
